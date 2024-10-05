@@ -3,10 +3,9 @@ import cors from "cors";
 
 import FrameBuilder from "./models/frameBuilder.js";
 import dotenvx from '@dotenvx/dotenvx';
+import mongoose from "mongoose";
 
-const mongoConnectString = dotenvx.config()
-
-console.log("mogodb connect string",process.env["MONGODB"])
+dotenvx.config()
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -14,9 +13,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", async (req, res) => {
 
-    console.log("mogodb connect string",process.env["MONGODB"])
+try {
+  console.log("Connecting to the MongoDB...")
+  await mongoose.connect(process.env["MONGODB"]);
+  console.log("Connected to the MongoDB!")
+} catch (error) {
+  console.error("Connect to the MongoDB failed:", error)
+  process.exit(-1)
+}
+
+app.get("/", async (req, res) => {
     const hello = {hello: "world"}
     res.send(hello).status(200);
   });

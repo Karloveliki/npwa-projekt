@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const FrameBuilderSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true, // Optional, but recommended
+    unique: true // This enforces uniqueness
+  },
   description: String
 });
 

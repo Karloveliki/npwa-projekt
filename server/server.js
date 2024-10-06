@@ -31,9 +31,21 @@ app.get("/", async (req, res) => {
 app.get("/frameBuilders", async (req, res) => {
     const frameBuilders = await FrameBuilder.find().exec();
     console.log("fetched data from mongo", )
-    res.send(frameBuilders).status(200);
+    res.status(200).json(frameBuilders);
 });
 
+app.post("/frameBuilders",async (req, res) =>{
+  console.log("post data to mongo",req.body)
+  try{
+    const newDocument = new FrameBuilder(req.body);
+    const result = await newDocument.save()
+    res.status(200).json(result)
+  }
+  catch(error){
+    console.error("post frameBuilder",error)
+    res.status(500).json({"error": error})
+  }
+})
 
 // start the Express server
 app.listen(PORT, () => {

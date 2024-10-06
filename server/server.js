@@ -47,6 +47,18 @@ app.post("/frameBuilders",async (req, res) =>{
   }
 })
 
+app.put('/frameBuilders/:pero', async (req, res) => {
+  try {
+    const frameBuilderId= req.params.pero
+    console.log("frameBuilder id",frameBuilderId)
+    const result = await FrameBuilder.findByIdAndUpdate(frameBuilderId, req.body, { new: true })
+    res.status(200).json(result)
+  } catch (err) {
+      res.status(500).json({ message: 'Error updating frameBuilder', error: err.message });
+  }
+});
+
+
 // start the Express server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);

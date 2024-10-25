@@ -92,7 +92,7 @@ app.delete("/frameBuilders/:id",async (req, res) => {
 
 
 app.get("/frames",async(req,res)=>{
-  const frames=await Frame.find()
+  const frames=await Frame.find().populate("frameBuilder")
   console.log("dohvaćeni frame sa baze")
   res.status(200).json(frames)
   
@@ -128,7 +128,7 @@ app.put('/frames/:id', async (req, res) => {
 app.get("/frames/:id", async (req, res) => {
   try {
     const frameId= req.params.id
-    const result= await Frame.findById(frameId)
+    const result= await Frame.findById(frameId).populate("frameBuilder")
     if(!result){
       return res.status(404).json("not found")
     }

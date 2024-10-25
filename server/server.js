@@ -2,8 +2,10 @@ import express from "express";
 import cors from "cors";
 
 import FrameBuilder from "./models/frameBuilder.js";
+import Frame from "./models/frame.js";
 import dotenvx from '@dotenvx/dotenvx';
 import mongoose from "mongoose";
+import frame from "./models/frame.js";
 
 dotenvx.config()
 
@@ -51,6 +53,9 @@ app.put('/frameBuilders/:id', async (req, res) => {
   try {
     const frameBuilderId= req.params.id
     const result = await FrameBuilder.findByIdAndUpdate(frameBuilderId, req.body, { new: true })
+    if(!result){
+      return res.status(404).json("not found")
+    }
     res.status(200).json(result)
   } catch (err) {
     res.status(500).json({ message: 'Error updating frameBuilder', error: err.message });
@@ -61,6 +66,9 @@ app.get("/frameBuilders/:id", async (req, res) => {
   try {
     const frameBuilderId= req.params.id
     const result= await FrameBuilder.findById(frameBuilderId)
+    if(!result){
+      return res.status(404).json("not found")
+    }
     res.status(200).json(result)
   }
   catch (err) {
@@ -72,6 +80,69 @@ app.delete("/frameBuilders/:id",async (req, res) => {
   try{
     const frameBuilderId= req.params.id
     const result=await FrameBuilder.findByIdAndDelete(frameBuilderId)
+    if(!result){
+      return res.status(404).json("not found")
+    }
+    res.status(200).json(result)
+  }
+  catch(err){
+    res.status(500).json({ message: 'Error', error: err.message });
+  }
+})
+
+
+app.get("/frames",async(req,res)=>{
+  const frames=await Frame.find()
+  console.log("dohvaćeni frame sa baze")
+  res.status(200).json(frames)
+  
+})
+
+app.post("/frames",async(req,res)=>{
+  try{
+  const newDocument = new Frame(req.body);
+    const result = await newDocument.save()
+    res.status(200).json(result)
+  }
+  catch(error){
+    console.error("post frame",error)
+    res.status(500).json({"error": error})
+  }
+})
+
+app.put('/frames/:id', async (req, res) => {
+  console.log("u put frme ruti")
+  try {
+    const frameId= req.params.id
+    console.log("frameid: ",frameId)
+    const result = await Frame.findByIdAndUpdate(frameId, req.body, { new: true })
+    if(!result){
+      return res.status(404).json("not found")
+    }
+    res.status(200).json(result)
+  } catch (err) {
+    res.status(500).json({ message: 'Error updating frame', error: err.message });
+  }
+});
+
+app.get("/frames/:id", async (req, res) => {
+  try {
+    const frameId= req.params.id
+    const result= await Frame.findById(frameId)
+    if(!result){
+      return res.status(404).json("not found")
+    }
+    res.status(200).json(result)
+  }
+  catch (err) {
+    res.status(500).json({ message: 'Error', error: err.message });
+  }
+})
+
+app.delete("/frames/:id",async (req, res) => {
+  try{
+    const frameId= req.params.id
+    const result=await Frame.findByIdAndDelete(frameId)
     if(!result){
       return res.status(404).json("not found")
     }

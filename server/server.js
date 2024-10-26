@@ -92,10 +92,16 @@ app.delete("/frameBuilders/:id",async (req, res) => {
 
 
 app.get("/frames",async(req,res)=>{
-  const frames=await Frame.find().populate("frameBuilder")
+  const sort=req.query.sort || "basePrice"
+  const baseSort = sort.replace("-","")
+  if(baseSort!="basePrice" && baseSort!="name"){
+    return res.status(400).json({"err": "invalid sort"})
+  }
+
+  console.log("sort: ",sort)
   console.log("dohvaćeni frame sa baze")
+  const frames=await Frame.find().populate("frameBuilder").sort(sort)
   res.status(200).json(frames)
-  
 })
 
 app.post("/frames",async(req,res)=>{

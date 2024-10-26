@@ -101,10 +101,18 @@ function makeFilter(req, filterNames) {
   return obj
 }
 
+function makeSort(req,arrayPossibilites,defaultSort){
+  const sort=req.query.sort || defaultSort
+  const baseSort=sort.replace("-","")
+  if(!arrayPossibilites.includes(baseSort)){
+    return false
+  }
+  return sort
+}
+
 app.get("/frames",async(req,res)=>{
-  const sort=req.query.sort || "basePrice"
-  const baseSort = sort.replace("-","")
-  if(baseSort!="basePrice" && baseSort!="name"){
+  const sort=makeSort(req,["basePrice","name"],"basePrice")
+  if(!sort){
     return res.status(400).json({"err": "invalid sort"})
   }
   const filter = makeFilter(req, ["name", "material","wheelSize"])

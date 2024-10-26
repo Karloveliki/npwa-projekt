@@ -31,7 +31,8 @@ app.get("/", async (req, res) => {
   });
 
 app.get("/frameBuilders", async (req, res) => {
-    const frameBuilders = await FrameBuilder.find().exec();
+    const filter=makeFilter(req,["name"])
+    const frameBuilders = await FrameBuilder.find(filter).exec();
     console.log("fetched data from mongo", )
     res.status(200).json(frameBuilders);
 });
@@ -90,6 +91,15 @@ app.delete("/frameBuilders/:id",async (req, res) => {
   }
 })
 
+function makeFilter(req, filterNames) {
+  const obj={}
+  filterNames.forEach(element => {
+    if(req.query[element]){
+      obj[element]=req.query[element]
+    }
+  });
+  return obj
+}
 
 app.get("/frames",async(req,res)=>{
   const sort=req.query.sort || "basePrice"
@@ -97,10 +107,8 @@ app.get("/frames",async(req,res)=>{
   if(baseSort!="basePrice" && baseSort!="name"){
     return res.status(400).json({"err": "invalid sort"})
   }
-
-  console.log("sort: ",sort)
-  console.log("dohvaćeni frame sa baze")
-  const frames=await Frame.find().populate("frameBuilder").sort(sort)
+  const filter = makeFilter(req, ["name", "material","wheelSize"])
+  const frames=await Frame.find(filter).populate("frameBuilder").sort(sort)
   res.status(200).json(frames)
 })
 

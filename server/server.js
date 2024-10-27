@@ -232,7 +232,68 @@ app.post("/users",async(req,res)=>{
   }
 })
 
+app.put("/users/:id",async(req,res)=>{
+  try{
+    const userId=req.params.id
+    const result=await User.findByIdAndUpdate(userId,req.body,{new: true})
+    if(!result){
+      return res.status(404).json("not found")
+    }
+    res.status(200).json(result)
+  }
+  catch(err){
+    console.log("err",err)
+    res.status(500).json(err)
+  }
+})
 
+app.get("/users/:id",async(req,res)=>{
+  try {
+    const userId= req.params.id
+    const result= await User.findById(userId)
+    if(!result){
+      return res.status(404).json("not found")
+    }
+    res.status(200).json(result)
+  }
+  catch (err) {
+    res.status(500).json({ message: 'Error', error: err.message });
+  }
+})
+
+app.delete("/users/:id",async(req,res)=>{
+  try{
+    const userId= req.params.id
+    const result=await  User.findByIdAndDelete(userId)
+    if(!result){
+      return res.status(404).json("not found")
+    }
+    res.status(200).json(result)
+  }
+  catch(err){
+    res.status(500).json({ message: 'Error', error: err.message });
+  }
+})
+
+app.post("/users/login",async(req,res)=>{
+  try{
+    const userName=req.body.userName
+    const userPassword=req.body.password
+    const rez=await User.findOne({userName})
+    if (!rez) {
+      return res.status(401).json({"notAuthorized": "not Authorized"})
+    }
+    const isValid = await bcrypt.compare(userPassword, rez["password"]);
+    if (isValid) {
+      return res.status(200).json(rez)
+    } else {
+        res.status(401).json({ message: 'Invalid credentials' });
+    }
+  }
+  catch(err){
+    res.status(500).json({err})
+  }
+})
 
 
 // start the Express server

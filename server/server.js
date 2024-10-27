@@ -5,7 +5,8 @@ import FrameBuilder from "./models/frameBuilder.js";
 import Frame from "./models/frame.js";
 import dotenvx from '@dotenvx/dotenvx';
 import mongoose from "mongoose";
-import frame from "./models/frame.js";
+import User from "./models/user.js";
+import bcrypt from 'bcryptjs'
 
 dotenvx.config()
 
@@ -31,10 +32,16 @@ app.get("/", async (req, res) => {
   });
 
 app.get("/frameBuilders", async (req, res) => {
+  try{
     const filter=makeFilter(req,["name"])
     const frameBuilders = await FrameBuilder.find(filter).exec();
     console.log("fetched data from mongo", )
     res.status(200).json(frameBuilders);
+  }
+  catch(error){
+    console.error("get frameBuilders",error)
+    res.status(500).json({"error": error})
+  }
 });
 
 app.post("/frameBuilders",async (req, res) =>{
@@ -103,21 +110,30 @@ function makeFilter(req, filterNames) {
 
 function makeSort(req,arrayPossibilites,defaultSort){
   const sort=req.query.sort || defaultSort
+  console.log("sort je: ",sort)
   const baseSort=sort.replace("-","")
+  console.log("baseSort je: ",baseSort)
   if(!arrayPossibilites.includes(baseSort)){
+    console.log("usao u if")
     return false
   }
   return sort
 }
 
 app.get("/frames",async(req,res)=>{
-  const sort=makeSort(req,["basePrice","name"],"basePrice")
-  if(!sort){
-    return res.status(400).json({"err": "invalid sort"})
+  try{
+    const sort=makeSort(req,["basePrice","name"],"basePrice")
+    if(!sort){
+      return res.status(400).json({"err": "invalid sort"})
+    }
+    const filter = makeFilter(req, ["name", "material","wheelSize"])
+    const frames=await Frame.find(filter).populate("frameBuilder").sort(sort)
+    res.status(200).json(frames)
   }
-  const filter = makeFilter(req, ["name", "material","wheelSize"])
-  const frames=await Frame.find(filter).populate("frameBuilder").sort(sort)
-  res.status(200).json(frames)
+  catch(error){
+    console.log("get frames err",error)
+    res.status(500).json({"error": error})
+  }
 })
 
 app.post("/frames",async(req,res)=>{
@@ -174,6 +190,50 @@ app.delete("/frames/:id",async (req, res) => {
     res.status(500).json({ message: 'Error', error: err.message });
   }
 })
+
+app.get("/users",async(req,res)=>{
+  try{
+    const filter=makeFilter(req,["userName","mail","phoneNumber","firstName","lastName"])
+    const sort=makeSort(req,["phoneNumber","userName","firstName","lastName","mail"],"firstName")
+    if(!sort){
+      return res.status(400).json({"err": "invalid sort"})
+    }
+
+    const users= await User.find(filter).sort(sort)
+    res.status(200).json(users)
+  }
+  catch(eror){
+    console.log("err",eror)
+    res.status(500).json({"err": eror})
+  }
+})
+
+app.post("/users",async(req,res)=>{
+  try{
+    const { password } = req.body;
+    //const [x,y] = [1,2]
+    //const {xx, yy} = {xx:77, yy:88, yyy:999}
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newDocument=new User({
+      ...req.body,
+      "basket": [],
+      "userType": "normalUser",
+      "password": hashedPassword,
+      "active": true
+    })
+    const result=await newDocument.save()
+    res.status(200).json(result)
+  }
+  catch(err){
+    console.log("err",err)
+    res.status(500).json(err)
+  }
+})
+
+
+
 
 // start the Express server
 app.listen(PORT, () => {

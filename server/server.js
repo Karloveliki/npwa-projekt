@@ -7,7 +7,7 @@ import dotenvx from '@dotenvx/dotenvx';
 import mongoose from "mongoose";
 import User from "./models/user.js";
 import bcrypt from 'bcryptjs'
-
+import jwt from 'jsonwebtoken'
 dotenvx.config()
 
 const PORT = process.env.PORT || 5050;
@@ -277,23 +277,36 @@ app.delete("/users/:id",async(req,res)=>{
 
 app.post("/users/login",async(req,res)=>{
   try{
+
+
     const userName=req.body.userName
     const userPassword=req.body.password
     const rez=await User.findOne({userName})
     if (!rez) {
+      console.log("notAuthorized")
       return res.status(401).json({"notAuthorized": "not Authorized"})
     }
     const isValid = await bcrypt.compare(userPassword, rez["password"]);
     if (isValid) {
-      return res.status(200).json(rez)
+      console.log("pocetak isValida")
+      const proba={
+        "koko": "u parizu"
+      }
+      const privateKey=process.env["JWT_PRIVATE_KEY"]
+      const token= jwt.sign(proba,privateKey)
+      console.log("prije nego sto posalje dokument i token")
+      return res.status(200).json({rez,token})
     } else {
+        console.log("invalid credentials")
         res.status(401).json({ message: 'Invalid credentials' });
     }
   }
   catch(err){
+    console.log("err",err)
     res.status(500).json({err})
   }
 })
+
 
 
 // start the Express server

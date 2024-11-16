@@ -6,7 +6,7 @@ function DropDown({options,onSelectionChange}){
     function onChange(ev) {
         const value=ev.target.value
         onSelectionChange(value)
-        console.log("odabrano je: ",ev)
+        
     }
 
 

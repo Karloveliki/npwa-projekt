@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import MojZadatak from './components/MojZadatak';
+import DropDown from './components/DropDown';
+
 function App() {
   return (
     <div className="App">
@@ -19,6 +21,7 @@ function App() {
           Learn React
         </a>
         <MojZadatak maliPatak="Patak007" bonde="james"></MojZadatak>
+        <DropDown options={[{name: "izbor1",value: 1},{name:"izbor2",value: 22}]} onSelectionChange={(value)=>{console.log("value je",value)}}></DropDown>
         <p>jedandaV</p>
       </header>
     </div>

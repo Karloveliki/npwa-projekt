@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ForOneFrame from "./ForOneFrame"
+import DropDown from "./DropDown";
+
 function Frame(){
     const [allFrames,setAllFrames]=useState([])
     const [greska,setGreska]=useState("")
@@ -34,13 +36,21 @@ function Frame(){
         }
     }
 
+    function putInDropDown(frames){
 
+        const frameList=frames.map((frame)=>{
+            return {"name": frame.name, "value": frame}
+                    
+        })
+        return frameList
+    }
 
 
     
     return <div>
         {allFrames.map((frame=>{return <ForOneFrame key={frame._id} frameDic={frame}></ForOneFrame>}))}
         <button onClick={()=>{catchFrame()}}>dohFrame</button>
+        <DropDown options={putInDropDown(allFrames)} onSelectionChange={(value)=>{console.log("value is: ",value)}}></DropDown>
         {loading ? <div>loading</div>:null}
         {greska ? <p>{greska}</p> : null}
     </div>

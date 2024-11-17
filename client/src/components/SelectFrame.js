@@ -20,7 +20,6 @@ function SelectFrame({frameBuilderId,onSelect}){
             if(response.ok){
                 const json= await response.json()
                 setFrames(json)
-                console.log("u jsonu",json)
             }
             else{
                 throw new Error("response nije dohvacen")
@@ -35,16 +34,16 @@ function SelectFrame({frameBuilderId,onSelect}){
             return {"name": frame.name, "value":  frame._id}
                     
         })
-        console.log("frameList je: ",frameList)
         return frameList
     }
     function internalOnSelect(match){
         const rez= frames.filter((frame)=>{return frame._id==match})
         onSelect(rez[0])
     }
+    
     useEffect(
        () => { catchFrames()},
-       []
+       [frameBuilderId]
     )
 
     return <div>

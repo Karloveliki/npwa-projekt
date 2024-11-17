@@ -11,6 +11,7 @@ function DropDown({options,onSelectionChange}){
 
 
     return <select onChange={onChange}>
+        <option disabled selected>Select</option>
         {options.map((option)=>{return <option value={option.value}>{option.name}</option>})}
     </select>
 

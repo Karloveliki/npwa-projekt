@@ -126,7 +126,7 @@ app.get("/frames",async(req,res)=>{
     if(!sort){
       return res.status(400).json({"err": "invalid sort"})
     }
-    const filter = makeFilter(req, ["name", "material","wheelSize"])
+    const filter = makeFilter(req, ["name", "material","wheelSize","frameBuilder"])
     const frames=await Frame.find(filter).populate("frameBuilder").sort(sort)
     res.status(200).json(frames)
   }

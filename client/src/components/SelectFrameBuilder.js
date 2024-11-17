@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import DropDown from "./DropDown";
 function SelectFrameBuilder({onSelect}){
     
@@ -28,7 +28,8 @@ function SelectFrameBuilder({onSelect}){
         catch(err){
             setGreska(err.message)
         }
-    }  
+    }
+
     function putInDropDown(frameBuilders){
 
         const frameBuilderList=frameBuilders.map((builder)=>{
@@ -37,13 +38,18 @@ function SelectFrameBuilder({onSelect}){
         })
         return frameBuilderList
     }
+
     function internalOnSelect(par){
        const rez= frBuilders.filter((builder)=>{return builder._id==par})
        onSelect(rez[0])
     }
 
+    useEffect(
+        () => { catchFrameBuilders()},
+        []
+    )
+
     return <div>
-        <button onClick={()=>{catchFrameBuilders()}}>dohFrameBuilders</button>
         {loading ? <div>loading</div>: null}
         {greska ? <p>{greska}</p>: null}
         {frBuilders ? <DropDown options={putInDropDown(frBuilders)} onSelectionChange={internalOnSelect} /> : null}

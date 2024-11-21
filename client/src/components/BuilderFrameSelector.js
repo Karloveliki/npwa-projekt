@@ -12,13 +12,12 @@ function BuilderFrameSelector(){
     }
     function onFrameSelect(fr){
         setFrame(fr)
-        console.log("onframeSelect: ",fr)
     }
     return <div>
         <SelectFrameBuilder onSelect={onFrameBuilderSelect} />
         {frameBuilder ? <SelectFrame frameBuilderId={frameBuilder._id} onSelect={onFrameSelect}/>: null}
-        {frameBuilder ? frameBuilder.name : "neima frame buičldera"} 
-        {frame ? <div><Link to={`/details/${frame._id}`}>{frame.name}</Link></div>: <p>nema framea</p>}
+        {frameBuilder ? frameBuilder.name : null} 
+        {frame ? <div><Link to={`/details/${frame._id}`}>{frame.name}</Link></div>: null}
     </div>
 }
 export default BuilderFrameSelector

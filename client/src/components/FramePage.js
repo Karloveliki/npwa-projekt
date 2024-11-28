@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom"
-import { useState,useEffect } from "react"
+import { useState,useEffect,useContext } from "react"
 import DataFrame from "./DataFrame"
 import { Link } from "react-router-dom";
+import KosaricaContext from "../Kosarica";
 function FramePage(){
     const params = useParams()
     const frameId=params.id 
@@ -36,7 +37,15 @@ function FramePage(){
         ()=>{catchFrame()},
         []
     )
+    const kosarica=useContext(KosaricaContext)
+    function dodajUKosaricu(){
+        console.log("dodavanje u kosaricu")
+        kosarica.dodajFrame(frame)
+    }
+    
     return <div>
+        <button onClick={dodajUKosaricu}>dodaj u kosaricu</button>
+        <p>{kosarica.sadrzaj.length}</p>
         {loading ? <div>loading</div>: null}
         {greska ? <div>{greska}</div>: null}
         {frame ? <DataFrame dict={frame}/>: null}

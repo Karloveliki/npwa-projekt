@@ -12,31 +12,38 @@ import {
   Route,
   useParams
 } from "react-router-dom";
+
+import KosaricaContext from './Kosarica';
 import FramePage from './components/FramePage';
+
+
 function App() {
   const [frameBuilder,setFrameBuilder]=useState({})
+  const [kosarica, setKosarica] = useState([])
 
+  const pocetnaKosarica = {
+    sadrzaj:kosarica,
+    dodajFrame: (frame) => { setKosarica([...kosarica, frame])}
+  }
+  
   function ispisFrameBuildera(s){
     setFrameBuilder(s)
     console.log("mjenja se na: ",s)
   }
   return (
     <div className="App">
-      <header className="App-header">        
-      
-      <div>
-        <Router>
-          <Routes>
-            <Route path="/details/:id" element={<FramePage />} />
-            <Route path="/" element={<BuilderFrameSelector/>} />
-          </Routes>
-        </Router>
-      </div>
-        
-        
-        
-        
-      </header>
+      <KosaricaContext.Provider value={pocetnaKosarica}>
+        <header className="App-header">        
+          <div>
+            <Router>
+              <Routes>
+                <Route path="/details/:id" element={<FramePage />} />
+                <Route path="/" element={<BuilderFrameSelector/>} />
+              </Routes>
+            </Router>
+          </div>
+        </header>
+      </KosaricaContext.Provider>
     </div>
   );
 }

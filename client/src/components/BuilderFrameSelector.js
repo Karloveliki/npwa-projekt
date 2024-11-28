@@ -1,7 +1,8 @@
 import SelectFrameBuilder from "./SelectFrameBuilder";
 import SelectFrame from "./SelectFrame";
-import { useState } from "react";
+import { useState , useContext} from "react";
 import { Link } from "react-router-dom";
+import KosaricaContext from "../Kosarica";
 function BuilderFrameSelector(){
 
     const[frameBuilder,setFrameBuilder]=useState(null)
@@ -13,7 +14,10 @@ function BuilderFrameSelector(){
     function onFrameSelect(fr){
         setFrame(fr)
     }
+    const kosarica=useContext(KosaricaContext)
+
     return <div>
+        <p>Kosarica: {kosarica.sadrzaj.length}</p>
         <SelectFrameBuilder onSelect={onFrameBuilderSelect} />
         {frameBuilder ? <SelectFrame frameBuilderId={frameBuilder._id} onSelect={onFrameSelect}/>: null}
         {frameBuilder ? frameBuilder.name : null} 

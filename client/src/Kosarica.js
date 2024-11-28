@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 const KosaricaContext = createContext({
-    sadrzaj:null
-  });
+    sadrzaj:[],
+    dodajFrame: (frame) => {}
+});
 
 export default KosaricaContext

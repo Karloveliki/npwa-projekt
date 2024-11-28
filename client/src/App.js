@@ -13,7 +13,7 @@ import {
   useParams
 } from "react-router-dom";
 
-import KosaricaContext from './Kosarica';
+import KosaricaContext from './KosaricaContext';
 import FramePage from './components/FramePage';
 
 

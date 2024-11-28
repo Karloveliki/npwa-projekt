@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { useState,useEffect,useContext } from "react"
 import DataFrame from "./DataFrame"
 import { Link } from "react-router-dom";
-import KosaricaContext from "../Kosarica";
+import KosaricaContext from "../KosaricaContext";
 function FramePage(){
     const params = useParams()
     const frameId=params.id 

@@ -23,7 +23,13 @@ function App() {
 
   const pocetnaKosarica = {
     sadrzaj:kosarica,
-    dodajFrame: (frame) => { setKosarica([...kosarica, frame])}
+    dodajFrame: (frame) => { setKosarica([...kosarica, frame]) },
+    brisanjeSve: ()=>{setKosarica([])},
+    brisanjeStavke: (ind)=>{ let cop=[...kosarica]
+                              cop.splice(ind,1)
+                              setKosarica(cop)
+                            }
+                            
   }
   
   function ispisFrameBuildera(s){

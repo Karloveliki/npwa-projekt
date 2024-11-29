@@ -4,6 +4,7 @@ import { useState , useContext} from "react";
 import { Link } from "react-router-dom";
 import KosaricaContext from "../KosaricaContext";
 import Kosarica from './Kosarica'
+import IkonaKosarica from "./IkonaKosarica";
 function BuilderFrameSelector(){
 
     const[frameBuilder,setFrameBuilder]=useState(null)
@@ -18,7 +19,7 @@ function BuilderFrameSelector(){
     const kosarica=useContext(KosaricaContext)
 
     return <div>
-        <p>Kosarica: {kosarica.sadrzaj.length}</p>
+        <IkonaKosarica></IkonaKosarica>
         <button onClick={(ev)=>{kosarica.brisanjeStavke(0)}}>obrisi prvi u kosarici</button>
         <Kosarica></Kosarica>
         <button onClick={kosarica.brisanjeSve}>obrisi sve u kosarici</button>

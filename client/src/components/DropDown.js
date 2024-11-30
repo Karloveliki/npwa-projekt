@@ -10,9 +10,9 @@ function DropDown({options,onSelectionChange}){
     }
 
 
-    return <select onChange={onChange}>
-        <option disabled selected>Select</option>
-        {options.map((option)=>{return <option value={option.value}>{option.name}</option>})}
+    return <select onChange={onChange} defaultValue="-1">
+        <option disabled value="-1">Select</option>
+        {options.map((option)=>{return <option key={option.value} value={option.value}>{option.name}</option>})}
     </select>
 
 }

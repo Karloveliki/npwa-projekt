@@ -39,7 +39,7 @@ function FramePage(){
     )
     const kosarica=useContext(KosaricaContext)
     function dodajUKosaricu(){
-        console.log("dodavanje u kosaricu")
+        console.log("dodavanje u kosaricu", frame)
         kosarica.dodajFrame(frame)
     }
     

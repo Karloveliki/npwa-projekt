@@ -15,7 +15,7 @@ import {
 
 import KosaricaContext from './KosaricaContext';
 import FramePage from './components/FramePage';
-
+import KosaricaPage from './components/KosaricaPage';
 
 function App() {
   const [frameBuilder,setFrameBuilder]=useState({})
@@ -29,7 +29,7 @@ function App() {
                               cop.splice(ind,1)
                               setKosarica(cop)
                             }
-                            
+
   }
   
   function ispisFrameBuildera(s){
@@ -45,6 +45,7 @@ function App() {
               <Routes>
                 <Route path="/details/:id" element={<FramePage />} />
                 <Route path="/" element={<BuilderFrameSelector/>} />
+                <Route path="/shoppingCart" element={<KosaricaPage/>}/>
               </Routes>
             </Router>
           </div>

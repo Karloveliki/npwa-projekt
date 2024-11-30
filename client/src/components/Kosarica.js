@@ -7,7 +7,7 @@ function Kosarica(){
     return <div>
         
         {kosarica.sadrzaj.map((frame,ind)=><KosaricaItem frame={frame} indeks={ind}/>)}
-        
+        {kosarica.sadrzaj.length!=0 ? <button onClick={kosarica.brisanjeSve}>obrisi cijelu kosaricu</button>: null}
     </div>
 }
 

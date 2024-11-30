@@ -1,16 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import MojZadatak from './components/MojZadatak';
-import DropDown from './components/DropDown';
-import SelectFrameBuilder from './components/SelectFrameBuilder';
-import SelectFrame from './components/SelectFrame';
 import BuilderFrameSelector from './components/BuilderFrameSelector'
 import { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useParams
+  Link
 } from "react-router-dom";
 
 import KosaricaContext from './KosaricaContext';
@@ -39,9 +34,12 @@ function App() {
   return (
     <div className="App">
       <KosaricaContext.Provider value={pocetnaKosarica}>
-        <header className="App-header">        
+        <header className="App-header"> 
           <div>
             <Router>
+              <div>
+                <Link to="/">Home</Link>
+              </div>      
               <Routes>
                 <Route path="/details/:id" element={<FramePage />} />
                 <Route path="/" element={<BuilderFrameSelector/>} />

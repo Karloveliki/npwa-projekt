@@ -39,13 +39,11 @@ function FramePage(){
     )
     const kosarica=useContext(KosaricaContext)
     function dodajUKosaricu(){
-        console.log("dodavanje u kosaricu", frame)
         kosarica.dodajFrame(frame)
     }
-    
     return <div>
         <button onClick={dodajUKosaricu}>dodaj u kosaricu</button>
-        <p>{kosarica.sadrzaj.length}</p>
+        <p>{kosarica.izracunKolicineTogFramea(frameId)}</p>
         {loading ? <div>loading</div>: null}
         {greska ? <div>{greska}</div>: null}
         {frame ? <DataFrame dict={frame}/>: null}

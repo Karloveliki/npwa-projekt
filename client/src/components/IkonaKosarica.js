@@ -5,11 +5,17 @@ import { Link } from "react-router-dom";
 function IkonaKosarica(){
     const kosarica=useContext(KosaricaContext)
     
-    return <div>kolicina:{kosarica.sadrzaj.length} 
-            <p>price:{kosarica.sadrzaj.reduce((acc,curVal)=>{
-              return  acc=acc+curVal.basePrice
-            },0)}</p>
+    return <div>
+           {kosarica.izracunajKolicinu() ? 
+            <div>
+            <div>kolicina:{kosarica.izracunajKolicinu()}</div> 
+            <p>price:{kosarica.izracunajPrice()}</p>
             <Link to={"/shoppingCart"}>Kosarica detalji</Link>
+            </div>:
+            <div>Kosarica je prazna</div>
+           } 
+            
+            
     
     </div>
 }

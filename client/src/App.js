@@ -18,13 +18,48 @@ function App() {
 
   const pocetnaKosarica = {
     sadrzaj:kosarica,
-    dodajFrame: (frame) => { setKosarica([...kosarica, frame]) },
+    dodajFrame: (frame) => {
+      for(let i=0;i<kosarica.length;i++){
+        if(kosarica[i].frame._id==frame._id){
+            const noviItem={frame,kolicina: kosarica[i].kolicina+1}
+            const novaKosarica=[...kosarica]
+            novaKosarica[i]=noviItem
+            setKosarica(novaKosarica)
+            return
+        }
+      } 
+      setKosarica([...kosarica, { frame, kolicina:1}]) 
+    },
     brisanjeSve: ()=>{setKosarica([])},
     brisanjeStavke: (ind)=>{ let cop=[...kosarica]
                               cop.splice(ind,1)
                               setKosarica(cop)
-                            }
-
+    },
+    izracunajPrice: ()=>{
+      let price=0
+      for(let i=0;i<kosarica.length;i++){
+        const item=kosarica[i]
+        price+=item.frame.basePrice*item.kolicina
+      }
+      return price
+    },
+    izracunajKolicinu: ()=>{
+      let kolicina=0
+      for(let i=0;i<kosarica.length;i++){
+        kolicina+=kosarica[i].kolicina
+      }
+      return kolicina
+    },
+    izracunKolicineTogFramea: (frameId)=>{
+      let kolicina=0
+      for(let i=0;i<kosarica.length;i++){
+        const item=kosarica[i]
+        if(item.frame._id==frameId){
+          kolicina+=item.kolicina
+        }
+      }
+      return kolicina
+    }
   }
   
   function ispisFrameBuildera(s){

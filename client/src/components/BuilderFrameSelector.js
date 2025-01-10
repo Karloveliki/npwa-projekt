@@ -20,8 +20,6 @@ function BuilderFrameSelector(){
 
     return <div>
         <IkonaKosarica></IkonaKosarica>
-        <button onClick={(ev)=>{kosarica.brisanjeStavke(0)}}>obrisi prvi u kosarici</button>
-        <button onClick={kosarica.brisanjeSve}>obrisi sve u kosarici</button>
         <SelectFrameBuilder onSelect={onFrameBuilderSelect} />
         {frameBuilder ? <SelectFrame frameBuilderId={frameBuilder._id} onSelect={onFrameSelect}/>: null}
         {frameBuilder ? frameBuilder.name : null} 

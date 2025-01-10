@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import KosaricaContext from "../KosaricaContext";
 import Dodano from "./Dodano"
 import { useNavigate } from 'react-router-dom'
+import Modal from './Modal'
 
 function FramePage(){
     const params = useParams()
@@ -59,7 +60,10 @@ function FramePage(){
 
     return <div>
         <button onClick={dodajUKosaricu}>dodaj u kosaricu</button>
-        <Dodano visible={dodano} onDa={da} onNe={ne} />
+        <Modal open={dodano}>
+            <Dodano visible={dodano} onDa={da} onNe={ne} /> 
+        </Modal>
+        
         <p>{kosarica.izracunKolicineTogFramea(frameId)}</p>
         {loading ? <div>loading</div>: null}
         {greska ? <div>{greska}</div>: null}

@@ -63,7 +63,6 @@ function FramePage(){
         <Modal open={dodano}>
             <Dodano visible={dodano} onDa={da} onNe={ne} /> 
         </Modal>
-        
         <p>{kosarica.izracunKolicineTogFramea(frameId)}</p>
         {loading ? <div>loading</div>: null}
         {greska ? <div>{greska}</div>: null}

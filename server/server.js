@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import User from "./models/user.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import authenticateToken from "./auth.js";
 dotenvx.config()
 
 const PORT = process.env.PORT || 5050;
@@ -191,7 +192,9 @@ app.delete("/frames/:id",async (req, res) => {
   }
 })
 
-app.get("/users",async(req,res)=>{
+app.get("/users",
+  authenticateToken,
+  async(req,res)=>{
   try{
     const filter=makeFilter(req,["userName","mail","phoneNumber","firstName","lastName"])
     const sort=makeSort(req,["phoneNumber","userName","firstName","lastName","mail"],"firstName")

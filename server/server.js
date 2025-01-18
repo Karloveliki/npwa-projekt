@@ -224,7 +224,7 @@ app.post("/users",async(req,res)=>{
       "active": true
     })
     const result=await newDocument.save()
-    res.status(200).json(result)
+    res.status(200).json(result["_id"])
   }
   catch(err){
     console.log("err",err)
@@ -278,26 +278,26 @@ app.delete("/users/:id",async(req,res)=>{
 app.post("/users/login",async(req,res)=>{
   try{
 
-
+    
     const userName=req.body.userName
     const userPassword=req.body.password
     const rez=await User.findOne({userName})
+    const userId=rez["_id"]
+    const userType=rez["userType"]
     if (!rez) {
-      console.log("notAuthorized")
       return res.status(401).json({"notAuthorized": "not Authorized"})
     }
     const isValid = await bcrypt.compare(userPassword, rez["password"]);
     if (isValid) {
-      console.log("pocetak isValida")
-      const proba={
-        "koko": "u parizu"
+      const payload={
+        userId,
+        userName,
+        userType
       }
       const privateKey=process.env["JWT_PRIVATE_KEY"]
-      const token= jwt.sign(proba,privateKey)
-      console.log("prije nego sto posalje dokument i token")
-      return res.status(200).json({rez,token})
+      const token= jwt.sign(payload,privateKey)
+      return res.status(200).json({userId,token})
     } else {
-        console.log("invalid credentials")
         res.status(401).json({ message: 'Invalid credentials' });
     }
   }

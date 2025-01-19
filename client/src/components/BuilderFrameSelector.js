@@ -19,7 +19,6 @@ function BuilderFrameSelector(){
     const kosarica=useContext(KosaricaContext)
 
     return <div>
-        <IkonaKosarica></IkonaKosarica>
         <SelectFrameBuilder onSelect={onFrameBuilderSelect} />
         {frameBuilder ? <SelectFrame frameBuilderId={frameBuilder._id} onSelect={onFrameSelect}/>: null}
         {frameBuilder ? frameBuilder.name : null} 

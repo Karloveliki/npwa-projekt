@@ -218,7 +218,6 @@ app.post("/users",async(req,res)=>{
     //const {xx, yy} = {xx:77, yy:88, yyy:999}
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
     const newDocument=new User({
       ...req.body,
       "basket": [],

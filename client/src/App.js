@@ -14,7 +14,7 @@ import KosaricaPage from './components/KosaricaPage';
 
 function App() {
   const [frameBuilder,setFrameBuilder]=useState({})
-  const [kosarica, setKosarica] = useState({sadrzaj:[]})
+  const [kosarica, setKosarica] = useState({sadrzaj:[], user:null})
 
   const dodajFrame = (frame) => {
     console.log("dodaj frame")
@@ -34,13 +34,16 @@ function App() {
     setKosarica({...kosarica, sadrzaj: noviSadrzaj}) 
     console.log("u dodaj frame1", kosarica)
   }
-
+ 
   const brisanjeSve = () =>{setKosarica({...kosarica, sadrzaj: []} )}
 
   const brisanjeStavke = (ind)=>{ let noviSadrzaj=[...kosarica.sadrzaj]
     noviSadrzaj.splice(ind,1)
     setKosarica({...kosarica, sadrzaj:noviSadrzaj})
   }
+
+  const setUser = (user) =>{setKosarica({...kosarica, user: user} )}
+
 
   const izracunajPrice = ()=>{
     let price=0
@@ -75,6 +78,7 @@ function App() {
     dodajFrame,
     brisanjeSve,
     brisanjeStavke,
+    setUser,
     izracunajPrice,
     izracunajKolicinu,
     izracunKolicineTogFramea

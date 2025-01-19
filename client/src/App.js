@@ -17,6 +17,7 @@ import IkonaKosarica from './components/IkonaKosarica';
 import UserStatus from './components/UserStatus';
 import Registration from './components/Registration';
 import AdminPage from './components/AdminPage';
+import AddFrameBuilders from './components/AddFrameBuilders';
 function App() {
   const [frameBuilder,setFrameBuilder]=useState({})
   const [kosarica, setKosarica] = useState({sadrzaj:[], user:null})
@@ -108,6 +109,7 @@ function App() {
               <IkonaKosarica/>
               <UserStatus/>
               <Routes>
+                <Route path="/admin/addBuilder" element={<AddFrameBuilders/>}/>
                 <Route path="/admin" element={<AdminPage/>}/>
                 <Route path="/register" element={<Registration/>}/>
                 <Route path="/login" element={<LoginPage/>}/>

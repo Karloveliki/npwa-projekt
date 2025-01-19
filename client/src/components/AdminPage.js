@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function BrisiButon({frameBuilderId}){
     const [load,setLoad]=useState(false)
@@ -65,6 +66,7 @@ function AdminPage(){
     
     return <div>
             <div>U adminu sam</div>
+            <Link to="/admin/addBuilder">dodaj buildera</Link>
             {frameBuilders ? frameBuilders.map((frBuilder)=>{
                 return <div><div>{frBuilder.name}</div> <BrisiButon frameBuilderId={frBuilder["_id"]}/></div>}) 
                 : null}

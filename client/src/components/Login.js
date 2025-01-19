@@ -1,9 +1,14 @@
 import KosaricaContext from "../KosaricaContext";
 import { useState , useContext} from "react";
-function Login(){
+import { useNavigate } from 'react-router-dom';
 
+function Login(){
+    const [greska,setGreska]=useState(false)
+    const [load,setLoad]=useState(false)
     const context=useContext(KosaricaContext)
+    const navigate = useNavigate();
     async function login(ev){
+        setGreska(false)
         ev.preventDefault()
         console.log("botun klik ",ev)
         const form = ev.currentTarget
@@ -19,14 +24,18 @@ function Login(){
               },
             body: JSON.stringify({userName,password})
         };
+        setLoad(true)
         const response = await fetch(`http://localhost:5050/users/login`, requestOptions)
+        setLoad(false)
         console.log(response)
         if (!response.ok) {
+            setGreska(true)
             console.log("bad response ")
         }
         const responseData = await response.json();
         console.log("responseData:  ",responseData)
         context.setUser(responseData)
+        navigate('/');
     }
 
     return <div>
@@ -35,9 +44,10 @@ function Login(){
             <input type="text" id="uname" name="uname"/><br/>
             <label htmlFor="password">Lozinka</label><br/>
             <input type="password" id="password" name="password"/><br/>
-            <button type="submit" >Login</button>
+            {load ? <button type="submit" disabled >Login</button>:<button type="submit">Login</button>}
         </form>
-           
+        {greska ? <div>Greska pri loginu</div>:null}
+
     </div>
 }
 export default Login

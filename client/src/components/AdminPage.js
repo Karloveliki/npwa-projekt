@@ -1,9 +1,38 @@
 import { useState,useEffect } from "react";
 
+function BrisiButon({frameBuilderId}){
+    const [load,setLoad]=useState(false)
+    const [greska,setGreska]=useState(false)
+
+    async function deleteFrameBuilder(frameBuilderId){
+        setGreska(false)
+        console.log("id: ",frameBuilderId)
+        const requestOptions = {
+            method: 'DELETE',
+            redirect: 'follow'
+        };
+        setLoad(true)
+        const response = await fetch(`http://localhost:5050/frameBuilder/${frameBuilderId}`, requestOptions)
+        setLoad(false)
+        if(!response.ok){
+            setGreska(true)
+            setLoad(false)
+        }
+    }
+
+    return <div>
+            <button onClick={()=>{deleteFrameBuilder(frameBuilderId)}}>obrisi</button>
+            {greska ? <div>greska</div>: null}
+            {load ? <div>loading</div>: null}
+          </div>
+}
+
+
 function AdminPage(){
     const [frameBuilders,setFrameBuilders]=useState(null)
     const [load,setLoad]=useState(false)
     const [greska,setGreska]=useState(false)
+
 
     async function getFrameBuilders(){
         setGreska(false)
@@ -26,23 +55,20 @@ function AdminPage(){
         }
     }
 
-    /*async function deleteFrameBuilder(){
-        const requestOptions = {
-            method: 'DELETE',
-            redirect: 'follow'
-        };
-        const response = await fetch("http://localhost:5050/frameBuilders?", requestOptions)
-    }
-   */
+    
+   
     useEffect(
             () => { getFrameBuilders()},
             []
         )
 
-
+    
     return <div>
             <div>U adminu sam</div>
-            {frameBuilders ? frameBuilders.map((frBuilder)=>{return <div>{frBuilder.name}</div>}) : null}
+            {frameBuilders ? frameBuilders.map((frBuilder)=>{
+                return <div><div>{frBuilder.name}</div> <BrisiButon frameBuilderId={frBuilder["_id"]}/></div>}) 
+                : null}
+
             {greska ? <div>greska</div> : null}
             {load ? <div>loading</div>:null}
         </div>

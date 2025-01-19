@@ -299,7 +299,7 @@ app.post("/users/login",async(req,res)=>{
       }
       const privateKey=process.env["JWT_PRIVATE_KEY"]
       const token= jwt.sign(payload,privateKey)
-      return res.status(200).json({userId,token})
+      return res.status(200).json({userId,userName,userType,token})
     } else {
         res.status(401).json({ message: 'Invalid credentials' });
     }

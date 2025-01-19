@@ -11,7 +11,8 @@ import {
 import KosaricaContext from './KosaricaContext';
 import FramePage from './components/FramePage';
 import KosaricaPage from './components/KosaricaPage';
-
+import Login from './components/Login';
+import LoginPage from './components/LoginPage';
 function App() {
   const [frameBuilder,setFrameBuilder]=useState({})
   const [kosarica, setKosarica] = useState({sadrzaj:[], user:null})
@@ -95,10 +96,12 @@ function App() {
         <header className="App-header"> 
           <div>
             <Router>
+                
               <div>
                 <Link to="/">Home</Link>
               </div>      
               <Routes>
+                <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/details/:id" element={<FramePage />} />
                 <Route path="/" element={<BuilderFrameSelector/>} />
                 <Route path="/shoppingCart" element={<KosaricaPage/>}/>

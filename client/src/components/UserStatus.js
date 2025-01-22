@@ -15,7 +15,8 @@ function UserStatus(){
     function userLogout(){
         context.setUser(null)
     }
-    
+    console.log("user name:   ",userName)
+    console.log("user type:   ",userType)
     return <div>
         {context.user? 
         <div>

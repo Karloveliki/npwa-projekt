@@ -69,7 +69,7 @@ function AdminPage(){
             <div>U adminu sam</div>
             <Link to="/admin/addBuilder">dodaj buildera</Link>
             {frameBuilders ? frameBuilders.map((frBuilder)=>{
-                return <div key={frBuilder._id}><div>{frBuilder.name}</div> <BrisiButon frameBuilderId={frBuilder["_id"]} onDelete={getFrameBuilders}/></div>}) 
+                return <div key={frBuilder._id}><Link to={`/admin/frameBuilders/${frBuilder._id}`}>{frBuilder.name}</Link> <BrisiButon frameBuilderId={frBuilder["_id"]} onDelete={getFrameBuilders}/></div>}) 
                 : null}
 
             {greska ? <div>greska</div> : null}

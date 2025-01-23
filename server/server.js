@@ -196,8 +196,7 @@ app.get("/frames/:id", async (req, res) => {
 
 app.delete("/frames/:id",
   authenticateToken,
-  checkAdmin,
-  async (req, res) => {
+  checkAdmin,async (req, res) => {
   try{
     const frameId= req.params.id
     const result=await Frame.findByIdAndDelete(frameId)

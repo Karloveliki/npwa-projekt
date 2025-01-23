@@ -34,8 +34,7 @@ function AddFrameBuilders(){
         else{
             setIfDodan(true)
         }
-        
-        
+    
     }
 
     if(ifDodan){

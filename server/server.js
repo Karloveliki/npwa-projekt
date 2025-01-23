@@ -147,7 +147,10 @@ app.get("/frames",async(req,res)=>{
   }
 })
 
-app.post("/frames",async(req,res)=>{
+app.post("/frames",
+  authenticateToken,
+  checkAdmin,
+  async(req,res)=>{
   try{
   const newDocument = new Frame(req.body);
     const result = await newDocument.save()
@@ -159,7 +162,10 @@ app.post("/frames",async(req,res)=>{
   }
 })
 
-app.put('/frames/:id', async (req, res) => {
+app.put('/frames/:id',
+  authenticateToken,
+  checkAdmin,
+  async (req, res) => {
   console.log("u put frme ruti")
   try {
     const frameId= req.params.id
@@ -188,7 +194,10 @@ app.get("/frames/:id", async (req, res) => {
   }
 })
 
-app.delete("/frames/:id",async (req, res) => {
+app.delete("/frames/:id",
+  authenticateToken,
+  checkAdmin,
+  async (req, res) => {
   try{
     const frameId= req.params.id
     const result=await Frame.findByIdAndDelete(frameId)

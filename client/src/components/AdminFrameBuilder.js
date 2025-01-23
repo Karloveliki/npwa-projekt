@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom"
         const params = useParams()
         const frameBuilderId=params.id 
         async function getFramesForBuilder(){
+            return
             setGreska(false)
             console.log("getframebuilderes")
             const requestOptions = {
@@ -35,8 +36,9 @@ import { useParams } from "react-router-dom"
                () => { getFramesForBuilder()},
                []
             )
-    return <div>
+        return <div>
                 <div> Frame Builder Admin</div>
+                <Link to={`/admin/frameBuilders/${frameBuilderId}/addFrame`}>doaj novi frame</Link>
                 {frames ? frames.map((frame)=>{ return <div>{frame.name}</div>}) : null}
             </div>
 }

@@ -9,6 +9,8 @@ import User from "./models/user.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import authenticateToken from "./auth.js";
+import checkAdmin from "./checkIfAdmin.js";
+
 dotenvx.config()
 
 const PORT = process.env.PORT || 5050;
@@ -45,7 +47,10 @@ app.get("/frameBuilders", async (req, res) => {
   }
 });
 
-app.post("/frameBuilders",async (req, res) =>{
+app.post("/frameBuilders",
+  authenticateToken,
+  checkAdmin,
+  async (req, res) =>{
   console.log("post data to mongo",req.body)
   try{
     const newDocument = new FrameBuilder(req.body);
@@ -58,7 +63,9 @@ app.post("/frameBuilders",async (req, res) =>{
   }
 })
 
-app.put('/frameBuilders/:id', async (req, res) => {
+app.put('/frameBuilders/:id', authenticateToken,
+  checkAdmin,
+  async (req, res) => {
   try {
     const frameBuilderId= req.params.id
     const result = await FrameBuilder.findByIdAndUpdate(frameBuilderId, req.body, { new: true })
@@ -87,11 +94,9 @@ app.get("/frameBuilders/:id", async (req, res) => {
 
 app.delete("/frameBuilders/:id",
   authenticateToken,
+  checkAdmin,
   async (req, res) => {
   try{
-    if(req.user.userType!="admin"){
-      return res.status(401).json({message: "not authorized"})
-    }
     const frameBuilderId= req.params.id
     const result=await FrameBuilder.findByIdAndDelete(frameBuilderId)
     if(!result){

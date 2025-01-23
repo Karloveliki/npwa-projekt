@@ -1,8 +1,56 @@
+import { useParams } from "react-router-dom"
+import { useContext } from "react"
+import KosaricaContext from '../KosaricaContext';
 function AddFrame(){
+    const params = useParams()
+    const context=useContext(KosaricaContext)
+    const user=context.user
+    console.log("user:  ",user)
+    async function addingFrames(ev){
+        //setLoad(false)
+       // setGreska(false)
+        ev.preventDefault()
+        const form = ev.currentTarget
+        const formElements = form.elements
+        const name=formElements.name.value
+        const bikeType=formElements.bikeType.value
+        const geometry_type=formElements.geometryType.value
+        const wheelSize=formElements.wheelSize.value
+        const suspension=formElements.suspension.value
+        const material=formElements.material.value
+        const availableSizes= Array.from(formElements.availableSizes.selectedOptions).map((option)=>{return option.value})
+        const images=[formElements.images.value]
+        const frameBuilder=params.id 
+        const basePrice=formElements.basePrice.value
+        const downPayment=formElements.downPayment.value
+        const forkIncluded=formElements.vilica.checked
+        console.log(formElements.vilica)
+        
+        const body={name,bikeType,geometry_type,wheelSize,suspension,
+            material,availableSizes,images,frameBuilder,basePrice,
+            downPayment,forkIncluded}
+        
+        console.log("body:   ",body)
+        const requestOptions = {
+            method: 'POST',
+            redirect: 'follow',
+            headers: {
+                'Content-Type': 'application/json', // Tell the server the data format
+                "Authorization": `Bearer ${user.token} `
+              },
+            body: JSON.stringify(body)
+        };
+        
+        const response = await fetch(`http://localhost:5050/frames`, requestOptions)
+        
+        if(!response.ok){
+            console.log("neuspjeh")
+        }
+        
+            
+    }
 
-
-
-    return <form onSubmit={(ev)=>{}}>
+    return <form onSubmit={(ev)=>{addingFrames(ev)}}>
         <label htmlFor="name"> name</label><br/>
         <input type="text" id="name" name="name"/><br/>
         <label htmlFor="bikeType">bike type: </label><br/>
@@ -16,10 +64,10 @@ function AddFrame(){
             <option value="bmx">bmx</option>
         </select><br/>
 
-        <label htmlFor="geometry_type">geometry_type</label><br/>
-        <select name="geometry_type" id="geometry_type" defaultValue='universal'>
+        <label htmlFor="geometryType">geometry type</label><br/>
+        <select name="geometryType" id="geometryType" defaultValue='universal'>
             <option value="man">man</option>
-            <option value="woman">woman</option>
+            <option value="women">women</option>
             <option value="universal">universal</option>
         </select><br/>
 
@@ -53,7 +101,7 @@ function AddFrame(){
 
 
         <label htmlFor="availableSizes"> availableSizes</label><br/>
-        <select name="availableSizes" id="availableSizes" defaultValue='steel' multiple>
+        <select name="availableSizes" id="availableSizes" defaultValue={['56']} multiple>
             <option value='47'>47</option>
             <option value='50'>50</option>
             <option value='52'>52</option>
@@ -77,7 +125,7 @@ function AddFrame(){
         <label htmlFor="downPayment"> downPayment </label><br/>
         <input type="text" id="downPayment" name="downPayment"/><br/>
         <label htmlFor="forkIncluded"> forkIncluded </label><br/>
-        <input type="text" id="forkIncluded" name="forkIncluded"/><br/>
+        <input type="checkbox" id="vilica" name="vilica"/><br/>
         <button type="submit">dodaj</button>
     </form> 
 }

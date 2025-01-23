@@ -44,7 +44,6 @@ function AddFrameBuilders(){
         </div>
     }
     return <div>
-            <button >Dodaj frame builder</button>
             <form onSubmit={(ev)=>{addingFrBuilder(ev)}}>
             <label htmlFor="name"> name</label><br/>
             <input type="text" id="name" name="name"/><br/>

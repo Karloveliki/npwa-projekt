@@ -1,12 +1,19 @@
 import { useParams } from "react-router-dom"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import KosaricaContext from '../KosaricaContext';
+import { Link } from "react-router-dom";
+
 function AddFrame(){
     const params = useParams()
     const context=useContext(KosaricaContext)
     const user=context.user
+    const [greska,setGreska]=useState(null)
+    const [load,setLoad]=useState(null)
+    const [dodan,setDodan]=useState(false)
+
     console.log("user:  ",user)
     async function addingFrames(ev){
+        setGreska(false)
         //setLoad(false)
        // setGreska(false)
         ev.preventDefault()
@@ -40,17 +47,28 @@ function AddFrame(){
               },
             body: JSON.stringify(body)
         };
-        
+        setLoad(true)
         const response = await fetch(`http://localhost:5050/frames`, requestOptions)
-        
+        setLoad(false)
         if(!response.ok){
             console.log("neuspjeh")
+            setGreska(true)
+            setLoad(false)
         }
-        
+        else{
+            setDodan(true)
             
+        }
     }
-
+    if(dodan){
+        return <div>
+                <div>uspjesno dodan</div>
+                <Link to={`/admin/frameBuilders/${params.id}`}>Nastavi do frameBuildera</Link>
+            </div>
+    }
     return <form onSubmit={(ev)=>{addingFrames(ev)}}>
+        {greska ? <div>greska</div>: null}
+        {load ? <div>loading</div>: null}
         <label htmlFor="name"> name</label><br/>
         <input type="text" id="name" name="name"/><br/>
         <label htmlFor="bikeType">bike type: </label><br/>

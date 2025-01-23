@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom"
         const params = useParams()
         const frameBuilderId=params.id 
         async function getFramesForBuilder(){
-            return
             setGreska(false)
             console.log("getframebuilderes")
             const requestOptions = {

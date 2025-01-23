@@ -85,8 +85,13 @@ app.get("/frameBuilders/:id", async (req, res) => {
   }
 })
 
-app.delete("/frameBuilders/:id",async (req, res) => {
+app.delete("/frameBuilders/:id",
+  authenticateToken,
+  async (req, res) => {
   try{
+    if(req.user.userType!="admin"){
+      return res.status(401).json({message: "not authorized"})
+    }
     const frameBuilderId= req.params.id
     const result=await FrameBuilder.findByIdAndDelete(frameBuilderId)
     if(!result){

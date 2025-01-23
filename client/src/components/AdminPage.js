@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function BrisiButon({frameBuilderId}){
+function BrisiButon({frameBuilderId,onDelete}){
     const [load,setLoad]=useState(false)
     const [greska,setGreska]=useState(false)
 
@@ -13,19 +13,21 @@ function BrisiButon({frameBuilderId}){
             redirect: 'follow'
         };
         setLoad(true)
-        const response = await fetch(`http://localhost:5050/frameBuilder/${frameBuilderId}`, requestOptions)
+        const response = await fetch(`http://localhost:5050/frameBuilders/${frameBuilderId}`, requestOptions)
         setLoad(false)
         if(!response.ok){
             setGreska(true)
             setLoad(false)
+            return
         }
+        onDelete()
     }
 
-    return <div>
+    return <span>
             <button onClick={()=>{deleteFrameBuilder(frameBuilderId)}}>obrisi</button>
             {greska ? <div>greska</div>: null}
             {load ? <div>loading</div>: null}
-          </div>
+            </span>
 }
 
 
@@ -33,7 +35,6 @@ function AdminPage(){
     const [frameBuilders,setFrameBuilders]=useState(null)
     const [load,setLoad]=useState(false)
     const [greska,setGreska]=useState(false)
-
 
     async function getFrameBuilders(){
         setGreska(false)
@@ -68,7 +69,7 @@ function AdminPage(){
             <div>U adminu sam</div>
             <Link to="/admin/addBuilder">dodaj buildera</Link>
             {frameBuilders ? frameBuilders.map((frBuilder)=>{
-                return <div><div>{frBuilder.name}</div> <BrisiButon frameBuilderId={frBuilder["_id"]}/></div>}) 
+                return <div><div>{frBuilder.name}</div> <BrisiButon frameBuilderId={frBuilder["_id"]} onDelete={getFrameBuilders}/></div>}) 
                 : null}
 
             {greska ? <div>greska</div> : null}

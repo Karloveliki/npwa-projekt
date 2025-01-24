@@ -34,7 +34,9 @@ app.get("/", async (req, res) => {
     res.send(hello).status(200);
   });
 
-app.get("/frameBuilders", async (req, res) => {
+app.get("/frameBuilders",
+   authenticateToken,
+  async (req, res) => {
   try{
     const filter=makeFilter(req,["name"])
     const frameBuilders = await FrameBuilder.find(filter).exec();
@@ -78,7 +80,9 @@ app.put('/frameBuilders/:id', authenticateToken,
   }
 });
 
-app.get("/frameBuilders/:id", async (req, res) => {
+app.get("/frameBuilders/:id",
+  authenticateToken
+  , async (req, res) => {
   try {
     const frameBuilderId= req.params.id
     const result= await FrameBuilder.findById(frameBuilderId)
@@ -131,7 +135,9 @@ function makeSort(req,arrayPossibilites,defaultSort){
   return sort
 }
 
-app.get("/frames",async(req,res)=>{
+app.get("/frames",
+  authenticateToken
+  ,async(req,res)=>{
   try{
     const sort=makeSort(req,["basePrice","name"],"basePrice")
     if(!sort){
@@ -180,7 +186,9 @@ app.put('/frames/:id',
   }
 });
 
-app.get("/frames/:id", async (req, res) => {
+app.get("/frames/:id", 
+  authenticateToken,
+  async (req, res) => {
   try {
     const frameId= req.params.id
     const result= await Frame.findById(frameId).populate("frameBuilder")
@@ -252,7 +260,9 @@ app.post("/users",async(req,res)=>{
   }
 })
 
-app.put("/users/:id",async(req,res)=>{
+app.put("/users/:id",authenticateToken,
+  // todo user moze samo svoje mjenjati osim admina koji moze sve
+  async(req,res)=>{
   try{
     const userId=req.params.id
     const result=await User.findByIdAndUpdate(userId,req.body,{new: true})
@@ -267,7 +277,10 @@ app.put("/users/:id",async(req,res)=>{
   }
 })
 
-app.get("/users/:id",async(req,res)=>{
+app.get("/users/:id",
+  authenticateToken,
+  //todo razmislit kako da user dohvaća samo svoj a admin svih
+  async(req,res)=>{
   try {
     const userId= req.params.id
     const result= await User.findById(userId)
@@ -281,7 +294,10 @@ app.get("/users/:id",async(req,res)=>{
   }
 })
 
-app.delete("/users/:id",async(req,res)=>{
+app.delete("/users/:id",
+  authenticateToken,
+  checkAdmin,
+  async(req,res)=>{
   try{
     const userId= req.params.id
     const result=await  User.findByIdAndDelete(userId)

@@ -20,6 +20,7 @@ import AdminPage from './components/AdminPage';
 import AddFrameBuilders from './components/AddFrameBuilders';
 import AdminFrameBuilder from './components/AdminFrameBuilder';
 import AddFrame from './components/AddFrame';
+import UserPage from './components/UserPage';
 function App() {
   const [frameBuilder,setFrameBuilder]=useState({})
   const [kosarica, setKosarica] = useState({sadrzaj:[], user:null})
@@ -103,13 +104,6 @@ function App() {
         <header className="App-header"> 
           <div>
             <Router>
-                
-              <div>
-                <Link to="/">Home</Link>
-              </div>
-              
-              <IkonaKosarica/>
-              <UserStatus/>
               <Routes>
                 <Route path="/admin/frameBuilders/:id/addFrame" element={<AddFrame/>}/>
                 <Route path="/admin/addBuilder" element={<AddFrameBuilders/>}/>
@@ -117,9 +111,9 @@ function App() {
                 <Route path="/admin" element={<AdminPage/>}/>
                 <Route path="/register" element={<Registration/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
-                <Route path="/details/:id" element={<FramePage />} />
-                <Route path="/" element={<BuilderFrameSelector/>} />
-                <Route path="/shoppingCart" element={<KosaricaPage/>}/>
+                <Route path="/details/:id" element={<UserPage><FramePage/></UserPage>} />
+                <Route path="/" element={<UserPage><BuilderFrameSelector/></UserPage>} />
+                <Route path="/shoppingCart" element={<UserPage><KosaricaPage/></UserPage>}/>
               </Routes>
             </Router>
           </div>

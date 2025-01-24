@@ -30,3 +30,9 @@ label {
   background-color: blueviolet;
   padding: 20px;
 }
+.login{
+  background-color: gray;
+}
+#userPage{
+  background-color: green
+}

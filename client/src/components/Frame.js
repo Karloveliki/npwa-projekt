@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
+import KosaricaContext from "../KosaricaContext";
 import ForOneFrame from "./ForOneFrame"
 import DropDown from "./DropDown";
 
@@ -6,6 +7,8 @@ function Frame(){
     const [allFrames,setAllFrames]=useState([])
     const [greska,setGreska]=useState("")
     const [loading,setLoading]=useState(false)
+    const context=useContext(KosaricaContext)
+    const user=context.user
     async function catchFrame(){
        
         try{
@@ -13,7 +16,11 @@ function Frame(){
 
             const requestOptions = {
                 method: 'GET',
-                redirect: 'follow'
+                redirect: 'follow',
+                headers: {
+                    'Content-Type': 'application/json', // Tell the server the data format
+                    'Authorization': `Bearer ${user.token}`
+                },
             };
             setLoading(true)
             const response = await fetch("http://localhost:5050/frames", requestOptions)

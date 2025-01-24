@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -14,4 +15,18 @@ code {
 
 A{
   color: blue
+}
+input[type=text] {
+  border: 2px solid red;
+  border-radius: 4px;
+}
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.container{
+  border-radius: 5px;
+  background-color: blueviolet;
+  padding: 20px;
 }

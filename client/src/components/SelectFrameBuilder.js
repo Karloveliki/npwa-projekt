@@ -1,7 +1,11 @@
 import { useState,useEffect } from "react";
 import DropDown from "./DropDown";
+import { useContext } from "react";
+import KosaricaContext from "../KosaricaContext";
+
 function SelectFrameBuilder({onSelect}){
-    
+  const context=useContext(KosaricaContext)
+  const user=context.user
   const[frBuilders,setFrBuilders]=useState([])
   const [greska,setGreska]=useState("")
   const [loading,setLoading]=useState(false)
@@ -10,7 +14,11 @@ function SelectFrameBuilder({onSelect}){
         try{
             const requestOptions = {
                 method: 'GET',
-                redirect: 'follow'
+                redirect: 'follow',
+                headers: {
+                    'Content-Type': 'application/json', // Tell the server the data format
+                    'Authorization': `Bearer ${user.token}`
+                },
             };
             setLoading(true)
             const response = await fetch("http://localhost:5050/frameBuilders", requestOptions)

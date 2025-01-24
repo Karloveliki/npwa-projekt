@@ -39,7 +39,7 @@ function Login(){
     }
 
     return <div>
-        <form  onSubmit={(ev)=>{login(ev)}}> 
+        <form  onSubmit={(ev)=>{login(ev)}} class=".container"> 
             <label htmlFor="uname">Korisnicko ime:</label><br/>
             <input type="text" id="uname" name="uname"/><br/>
             <label htmlFor="password">Lozinka</label><br/>

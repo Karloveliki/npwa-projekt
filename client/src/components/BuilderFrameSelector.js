@@ -3,8 +3,7 @@ import SelectFrame from "./SelectFrame";
 import { useState , useContext} from "react";
 import { Link } from "react-router-dom";
 import KosaricaContext from "../KosaricaContext";
-import Kosarica from './Kosarica'
-import IkonaKosarica from "./IkonaKosarica";
+
 function BuilderFrameSelector(){
 
     const[frameBuilder,setFrameBuilder]=useState(null)

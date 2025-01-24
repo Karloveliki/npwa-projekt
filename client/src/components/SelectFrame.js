@@ -1,17 +1,24 @@
 
 import DropDown from "./DropDown";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useContext } from "react";
+import KosaricaContext from "../KosaricaContext";
 function SelectFrame({frameBuilderId,onSelect}){
-    
+    const context=useContext(KosaricaContext)
+    const user=context.user
     const[frames,setFrames]=useState([])
     const [greska,setGreska]=useState("")
     const [loading,setLoading]=useState(false)
 
+    
     async function catchFrames(){
         try{
             const requestOptions = {
                 method: 'GET',
-                redirect: 'follow'
+                redirect: 'follow',
+                headers: {
+                    'Content-Type': 'application/json', // Tell the server the data format
+                    'Authorization': `Bearer ${user.token}`
+                  },
             };
             setLoading(true)
             const response = await fetch(`http://localhost:5050/frames?frameBuilder=${frameBuilderId}`, requestOptions)

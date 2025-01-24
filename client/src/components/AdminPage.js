@@ -42,13 +42,18 @@ function AdminPage(){
     const [frameBuilders,setFrameBuilders]=useState(null)
     const [load,setLoad]=useState(false)
     const [greska,setGreska]=useState(false)
-
+    const context=useContext(KosaricaContext)
+    const user=context.user
     async function getFrameBuilders(){
         setGreska(false)
         console.log("getframebuilderes")
         const requestOptions = {
             method: 'GET',
-            redirect: 'follow'
+            redirect: 'follow',
+            headers: {
+                'Content-Type': 'application/json', // Tell the server the data format
+                'Authorization': `Bearer ${user.token}`
+            },
         };
         setLoad(true)
         const response = await fetch("http://localhost:5050/frameBuilders", requestOptions)

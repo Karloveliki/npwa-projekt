@@ -14,13 +14,18 @@ function FramePage(){
     const [loading,setLoading]=useState(false)
     const [frame,setFrame]=useState(null)
     const [dodano,setDodano]=useState(false)
-
+    const context=useContext(KosaricaContext)
+    const user=context.user
     console.log(params)
     async function catchFrame(){
         try{
             const requestOptions = {
                 method: 'GET',
-                redirect: 'follow'
+                redirect: 'follow',
+                headers: {
+                    'Content-Type': 'application/json', // Tell the server the data format
+                    'Authorization': `Bearer ${user.token}`
+                },
             };
             setLoading(true)
             const response = await fetch(`http://localhost:5050/frames/${frameId}`, requestOptions)

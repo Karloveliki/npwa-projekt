@@ -77,7 +77,7 @@ function BrisiButon({frameId, onDelete}){
                 <div> Frame Builder Admin</div>
                 <Link to={`/admin/frameBuilders/${frameBuilderId}/addFrame`}>doaj novi frame</Link>
 
-                {frames ? frames.map((frame)=>{ return <div>{frame.name}<BrisiButon frameId={frame._id}
+                {frames ? frames.map((frame)=>{ return <div key={frame._id}>{frame.name}<BrisiButon frameId={frame._id}
                  onDelete={getFramesForBuilder}/></div>}) : null}
             </div>
 }

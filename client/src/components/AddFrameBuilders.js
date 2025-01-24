@@ -1,10 +1,13 @@
-import { useState } from "react"
+import { useState,useContext } from "react"
 import { Link } from "react-router-dom"
+import KosaricaContext from '../KosaricaContext';
+
 function AddFrameBuilders(){
     const [load,setLoad]=useState(false)
     const [greska,setGreska]=useState(false)
     const [ifDodan,setIfDodan]=useState(false)
-
+    const context=useContext(KosaricaContext)
+    const user=context.user
     async function addingFrBuilder(ev){
         setLoad(false)
         setGreska(false)
@@ -21,6 +24,7 @@ function AddFrameBuilders(){
             redirect: 'follow',
             headers: {
                 'Content-Type': 'application/json', // Tell the server the data format
+                'Authorization': `Bearer ${user.token}`
               },
             body: JSON.stringify({name,country,contact})
         };

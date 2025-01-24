@@ -1,16 +1,23 @@
 import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react"
+import KosaricaContext from '../KosaricaContext';
 
 function BrisiButon({frameBuilderId,onDelete}){
     const [load,setLoad]=useState(false)
     const [greska,setGreska]=useState(false)
-
+    const context=useContext(KosaricaContext)
+    const user=context.user
     async function deleteFrameBuilder(frameBuilderId){
         setGreska(false)
         console.log("id: ",frameBuilderId)
         const requestOptions = {
             method: 'DELETE',
-            redirect: 'follow'
+            redirect: 'follow',
+            headers: {
+                'Content-Type': 'application/json', // Tell the server the data format
+                'Authorization': `Bearer ${user.token}`
+            },
         };
         setLoad(true)
         const response = await fetch(`http://localhost:5050/frameBuilders/${frameBuilderId}`, requestOptions)

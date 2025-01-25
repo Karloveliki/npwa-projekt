@@ -93,27 +93,21 @@ function App() {
 
   
   return (
-    <div className="App">
-      <KosaricaContext.Provider value={kosaricaValue}>
-        <header className="App-header"> 
-          <div>
-            <Router>
-              <Routes>
-                <Route path="/admin/frameBuilders/:id/addFrame" element={<AdminContent><AddFrame/></AdminContent>}/>
-                <Route path="/admin/addBuilder" element={<AdminContent><AddFrameBuilders/></AdminContent>}/>
-                <Route path="/admin/frameBuilders/:id" element={<AdminContent><AdminFrameBuilder/></AdminContent>}/>
-                <Route path="/admin" element={<AdminContent><AdminPage/></AdminContent>}/>
-                <Route path="/register" element={<PublicPage><Registration/></PublicPage>}/>
-                <Route path="/login" element={<PublicPage><LoginPage/></PublicPage>}/>
-                <Route path="/details/:id" element={<UserPage><FramePage/></UserPage>} />
-                <Route path="/" element={<UserPage><BuilderFrameSelector/></UserPage>} />
-                <Route path="/shoppingCart" element={<UserPage><KosaricaPage/></UserPage>}/>
-              </Routes>
-            </Router>
-          </div>
-        </header>
-      </KosaricaContext.Provider>
-    </div>
+    <KosaricaContext.Provider value={kosaricaValue}>
+      <Router>
+        <Routes>
+          <Route path="/admin/frameBuilders/:id/addFrame" element={<AdminContent><AddFrame/></AdminContent>}/>
+          <Route path="/admin/addBuilder" element={<AdminContent><AddFrameBuilders/></AdminContent>}/>
+          <Route path="/admin/frameBuilders/:id" element={<AdminContent><AdminFrameBuilder/></AdminContent>}/>
+          <Route path="/admin" element={<AdminContent><AdminPage/></AdminContent>}/>
+          <Route path="/register" element={<PublicPage><Registration/></PublicPage>}/>
+          <Route path="/login" element={<PublicPage><LoginPage/></PublicPage>}/>
+          <Route path="/details/:id" element={<UserPage><FramePage/></UserPage>} />
+          <Route path="/" element={<UserPage><BuilderFrameSelector/></UserPage>} />
+          <Route path="/shoppingCart" element={<UserPage><KosaricaPage/></UserPage>}/>
+        </Routes>
+      </Router>
+    </KosaricaContext.Provider>
   );
 }
 

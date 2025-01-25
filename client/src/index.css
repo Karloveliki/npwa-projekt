@@ -1,41 +1,8 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-A{
-  color: blue
-}
-input[type=text] {
-  border: 2px solid red;
-  border-radius: 4px;
-}
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
-}
-
-.container{
-  border-radius: 5px;
-  background-color: blueviolet;
-  padding: 20px;
-}
-.login{
-  background-color: gray;
-}
-#userPage{
-  background-color: green
-}
-#AdminPage{
-
+.topDiv {
+    position: absolute; /* Take the div out of the normal flow */
+    top: 0; /* Position it at the top edge */
+    left: 0; /* Position it at the left edge */
+    width: 100%; /* Make it as wide as the body */
+    height: 100%; /* Make it as tall as the body */
+    z-index: -1; /* Send it behind other content, if necessary */    
 }

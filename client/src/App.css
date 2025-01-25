@@ -1,7 +1,7 @@
-.App {
+.xApp {
   text-align: center;
 }
-body{
+xbody{
   color: white;
   padding: 40px;
   font-family: Arial;
@@ -9,7 +9,7 @@ body{
 }
 
 
-.App-header {
+.xApp-header {
   background-color: #cc4e13;
   min-height: 100vh;
   display: flex;

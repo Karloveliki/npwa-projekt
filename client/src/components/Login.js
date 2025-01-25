@@ -43,8 +43,8 @@ function Login(){
         navigate('/');
     }
 
-    return <div class="login">
-        <form  onSubmit={(ev)=>{login(ev)}} class="container"> 
+    return <div >
+        <form  onSubmit={(ev)=>{login(ev)}} > 
             <label htmlFor="uname">Korisnicko ime:</label><br/>
             <input type="text" id="uname" name="uname"/><br/>
             <label htmlFor="password">Lozinka</label><br/>

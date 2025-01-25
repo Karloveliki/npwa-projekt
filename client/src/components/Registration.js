@@ -29,7 +29,7 @@ function Registration(){
             setRegistered(true)
         }
     }
-    return <div class="login">
+    return <div >
         <h1>Registracija</h1>
         {registered ? <Link to="/login">Login</Link>:
         <form onSubmit={(ev)=>{register(ev)}}>

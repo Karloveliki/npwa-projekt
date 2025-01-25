@@ -31,6 +31,7 @@ function Login(){
         if (!response.ok) {
             setGreska(true)
             console.log("bad response ")
+            return
         }
         const responseData = await response.json();
         console.log("responseData:  ",responseData)

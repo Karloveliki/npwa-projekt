@@ -318,6 +318,9 @@ app.post("/users/login",async(req,res)=>{
     const userName=req.body.userName
     const userPassword=req.body.password
     const rez=await User.findOne({userName})
+    if(!rez){
+      return res.status(401).json({"message":"not Authorized"})
+    }
     const userId=rez["_id"]
     const userType=rez["userType"]
     if (!rez) {

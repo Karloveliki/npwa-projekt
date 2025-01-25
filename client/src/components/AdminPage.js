@@ -78,7 +78,7 @@ function AdminPage(){
         )
 
     return (
-        <div className="w3-container wr-section">
+        <div className="w3-container w3-section">
             <h2 className="w3-section">Frame builders</h2>
             <div className="w3-cell-row w3-section" >
                 <div className="w3-twothird">

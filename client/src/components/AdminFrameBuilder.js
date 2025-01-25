@@ -78,13 +78,21 @@ function BrisiButon({frameId, onDelete}){
                () => { getFramesForBuilder()},
                []
             )
-        return <div>
-                <div> Frame Builder Admin</div>
-                <Link to={`/admin/frameBuilders/${frameBuilderId}/addFrame`}>doaj novi frame</Link>
-
-                {frames ? frames.map((frame)=>{ return <div key={frame._id}>{frame.name}<BrisiButon frameId={frame._id}
-                 onDelete={getFramesForBuilder}/></div>}) : null}
-            </div>
+        return (
+            <div className="w3-container w3-section">
+                <h2>{frameBuilderId}</h2>
+                <div className="w3-cell-row w3-section">
+                    <div className="w3-twothird">
+                        {frames ? frames.map((frame)=>{ return <div key={frame._id}>{frame.name}<BrisiButon frameId={frame._id}
+                        onDelete={getFramesForBuilder}/></div>}) : null}
+                    </div>
+                    <div className="w3-third w3-container">
+                        <Link to={`/admin/frameBuilders/${frameBuilderId}/addFrame`}>doaj novi frame</Link>
+                    </div>
+                </div>
+            </div>  
+        )
+        
 }
 
 export default AdminFrameBuilder

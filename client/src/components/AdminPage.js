@@ -30,11 +30,14 @@ function BrisiButon({frameBuilderId,onDelete}){
         onDelete()
     }
 
-    return <span>
-            <button onClick={()=>{deleteFrameBuilder(frameBuilderId)}}>obrisi</button>
+    return (
+        <span onClick={()=>{deleteFrameBuilder(frameBuilderId)}} class="w3-bar-item w3-button w3-white w3-xlarge w3-right">
+            ×
             {greska ? <div>greska</div>: null}
             {load ? <div>loading</div>: null}
-            </span>
+        </span>
+
+    )
 }
 
 
@@ -74,23 +77,27 @@ function AdminPage(){
             []
         )
 
-    return <div>
+    return <div className="w3-container">
             <Link to="/admin/addBuilder">dodaj buildera</Link>
+            <ul className="w3-ul w3-card-4 w3-pale-blue">
             {frameBuilders ? frameBuilders.map((frBuilder)=>{
                 return (
-                    <div key={frBuilder._id}>
+                    <li className="w3-bar" key={frBuilder._id}>
                         <Link to={`/admin/frameBuilders/${frBuilder._id}`}>
-                            {frBuilder.name}
+                            <div class="w3-bar-item">
+                                <span class="w3-large">{frBuilder.name}</span>
+                            </div>
                         </Link>
                         {frBuilder.frames.length ?  
                             null 
                             :
                             <BrisiButon frameBuilderId={frBuilder["_id"]} onDelete={getFrameBuilders}/>
                         }
-                    </div>
+                    </li>
                 )}) 
                 : null
             }
+            </ul>
             {greska ? <div>greska</div> : null}
             {load ? <div>loading</div>:null}
         </div>

@@ -75,7 +75,6 @@ function AdminPage(){
         )
 
     return <div>
-            <div>U adminu sam</div>
             <Link to="/admin/addBuilder">dodaj buildera</Link>
             {frameBuilders ? frameBuilders.map((frBuilder)=>{
                 return (

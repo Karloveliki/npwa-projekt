@@ -61,7 +61,7 @@ function AdminPage(){
         if(response.ok){
             const responseData=await response.json()
             setFrameBuilders(responseData)
-            console.log("response: ",responseData)
+            console.log("frameBuilders: ",responseData)
         }
         else{
             setGreska(true)
@@ -69,21 +69,29 @@ function AdminPage(){
         }
     }
 
-    
-   
     useEffect(
             () => { getFrameBuilders()},
             []
         )
 
-    
     return <div>
             <div>U adminu sam</div>
             <Link to="/admin/addBuilder">dodaj buildera</Link>
             {frameBuilders ? frameBuilders.map((frBuilder)=>{
-                return <div key={frBuilder._id}><Link to={`/admin/frameBuilders/${frBuilder._id}`}>{frBuilder.name}</Link> <BrisiButon frameBuilderId={frBuilder["_id"]} onDelete={getFrameBuilders}/></div>}) 
-                : null}
-
+                return (
+                    <div key={frBuilder._id}>
+                        <Link to={`/admin/frameBuilders/${frBuilder._id}`}>
+                            {frBuilder.name}
+                        </Link>
+                        {frBuilder.frames.length ?  
+                            null 
+                            :
+                            <BrisiButon frameBuilderId={frBuilder["_id"]} onDelete={getFrameBuilders}/>
+                        }
+                    </div>
+                )}) 
+                : null
+            }
             {greska ? <div>greska</div> : null}
             {load ? <div>loading</div>:null}
         </div>

@@ -39,7 +39,22 @@ app.get("/frameBuilders",
   async (req, res) => {
   try{
     const filter=makeFilter(req,["name"])
-    const frameBuilders = await FrameBuilder.find(filter).exec();
+    //const frameBuilders = await FrameBuilder.find(filter).exec();
+    const aggregationPipeline = [
+      {
+          $match: filter, // Use your filtering function to create the proper filter
+      },
+      {
+        $lookup: {
+          from: 'frames',  // Name of the frames collection
+          localField: '_id', // Field in the FrameBuilder collection
+          foreignField: 'frameBuilder', // Field in the Frame collection
+          as: 'frames' // Result will be placed here
+        }
+      },
+  ];
+
+    const frameBuilders = await FrameBuilder.aggregate(aggregationPipeline).exec();
     console.log("fetched data from mongo", )
     res.status(200).json(frameBuilders);
   }

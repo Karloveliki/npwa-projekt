@@ -86,7 +86,7 @@ function AdminPage(){
                     {frameBuilders ? frameBuilders.map((frBuilder)=>{
                         return (
                             <li className="w3-bar" key={frBuilder._id}>
-                                <Link to={`/admin/frameBuilders/${frBuilder._id}`}>
+                                <Link to={`/admin/frameBuilders/${frBuilder._id}/${frBuilder.name}`}>
                                     <div class="w3-bar-item">
                                         <span class="w3-large">{frBuilder.name}</span>
                                     </div>

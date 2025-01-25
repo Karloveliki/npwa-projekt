@@ -98,7 +98,7 @@ function App() {
         <Routes>
           <Route path="/admin/frameBuilders/:id/addFrame" element={<AdminContent><AddFrame/></AdminContent>}/>
           <Route path="/admin/addBuilder" element={<AdminContent><AddFrameBuilders/></AdminContent>}/>
-          <Route path="/admin/frameBuilders/:id" element={<AdminContent><AdminFrameBuilder/></AdminContent>}/>
+          <Route path="/admin/frameBuilders/:id/:name" element={<AdminContent><AdminFrameBuilder/></AdminContent>}/>
           <Route path="/admin" element={<AdminContent><AdminPage/></AdminContent>}/>
           <Route path="/register" element={<PublicPage><Registration/></PublicPage>}/>
           <Route path="/login" element={<PublicPage><LoginPage/></PublicPage>}/>

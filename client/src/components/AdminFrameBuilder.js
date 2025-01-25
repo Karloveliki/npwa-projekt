@@ -48,6 +48,7 @@ function BrisiButon({frameId, onDelete}){
         const user=context.user
         const params = useParams()
         const frameBuilderId=params.id 
+        const frameBuilderName=params.name 
         async function getFramesForBuilder(){
             setGreska(false)
             console.log("getframebuilderes")
@@ -80,7 +81,7 @@ function BrisiButon({frameId, onDelete}){
             )
         return (
             <div className="w3-container w3-section">
-                <h2>{frameBuilderId}</h2>
+                <h2>{frameBuilderName}</h2>
                 <div className="w3-cell-row w3-section">
                     <div className="w3-twothird">
                         {frames ? frames.map((frame)=>{ return <div key={frame._id}>{frame.name}<BrisiButon frameId={frame._id}

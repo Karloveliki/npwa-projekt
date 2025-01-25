@@ -6,7 +6,9 @@ function AdminContent({children}){
     const context=useContext(KosaricaContext)
     const user=context.user
     if(!user || user.userType!="admin"){
-        return <div>Neispravan login admina</div>
+        return <div><div>Neispravan login admina</div>
+                <Link to={'/login'}>ulogirajte se kao admin</Link>
+              </div>
     }
     return <div id="adminPage">
 

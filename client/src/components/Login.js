@@ -36,6 +36,10 @@ function Login(){
         const responseData = await response.json();
         console.log("responseData:  ",responseData)
         context.setUser(responseData)
+        if(responseData.userType=="admin"){
+            navigate('/admin')
+            return
+        }
         navigate('/');
     }
 

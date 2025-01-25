@@ -77,31 +77,38 @@ function AdminPage(){
             []
         )
 
-    return <div className="w3-container">
-            <Link to="/admin/addBuilder">dodaj buildera</Link>
-            <ul className="w3-ul w3-card-4 w3-pale-blue">
-            {frameBuilders ? frameBuilders.map((frBuilder)=>{
-                return (
-                    <li className="w3-bar" key={frBuilder._id}>
-                        <Link to={`/admin/frameBuilders/${frBuilder._id}`}>
-                            <div class="w3-bar-item">
-                                <span class="w3-large">{frBuilder.name}</span>
-                            </div>
-                        </Link>
-                        {frBuilder.frames.length ?  
-                            null 
-                            :
-                            <BrisiButon frameBuilderId={frBuilder["_id"]} onDelete={getFrameBuilders}/>
-                        }
-                    </li>
-                )}) 
-                : null
-            }
-            </ul>
-            {greska ? <div>greska</div> : null}
-            {load ? <div>loading</div>:null}
+    return (
+        <div className="w3-container wr-section">
+            <h2 className="w3-section">Frame builders</h2>
+            <div className="w3-cell-row w3-section" >
+                <div className="w3-twothird">
+                    <ul className="w3-ul  w3-card-4 w3-pale-blue">
+                    {frameBuilders ? frameBuilders.map((frBuilder)=>{
+                        return (
+                            <li className="w3-bar" key={frBuilder._id}>
+                                <Link to={`/admin/frameBuilders/${frBuilder._id}`}>
+                                    <div class="w3-bar-item">
+                                        <span class="w3-large">{frBuilder.name}</span>
+                                    </div>
+                                </Link>
+                                {frBuilder.frames.length ?  
+                                    null 
+                                    :
+                                    <BrisiButon frameBuilderId={frBuilder["_id"]} onDelete={getFrameBuilders}/>
+                                }
+                            </li>
+                        )}) 
+                        : null
+                    }
+                    </ul>
+                    {greska ? <div>greska</div> : null}
+                    {load ? <div>loading</div>:null}
+                </div>
+                <div className="w3-third w3-container">
+                    <Link className="w3-button w3-xlarge w3-round-large w3-blue" to="/admin/addBuilder">dodaj buildera</Link>
+                </div>
+            </div>
         </div>
-
-    
+    )
 }
 export default AdminPage

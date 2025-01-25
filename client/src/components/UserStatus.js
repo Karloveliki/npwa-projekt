@@ -18,13 +18,11 @@ function UserStatus(){
         context.setUser(null)
         navigate('/')
     }
-    console.log("user name:   ",userName)
-    console.log("user type:   ",userType)
     return <div>
         {context.user? 
-        <div>
-            <button onClick={userLogout}>User logout</button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }} >
             <div>{userName}</div>
+            <button onClick={userLogout}>Odjava</button>
         </div>
         :<Link to='/login'>Login Page</Link>
         }

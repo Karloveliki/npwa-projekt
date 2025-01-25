@@ -4,17 +4,13 @@ import { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import KosaricaContext from './KosaricaContext';
 import FramePage from './components/FramePage';
 import KosaricaPage from './components/KosaricaPage';
-import Login from './components/Login';
 import LoginPage from './components/LoginPage';
-import IkonaKosarica from './components/IkonaKosarica';
-import UserStatus from './components/UserStatus';
 import Registration from './components/Registration';
 import AdminPage from './components/AdminPage';
 import AddFrameBuilders from './components/AddFrameBuilders';
@@ -95,11 +91,7 @@ function App() {
     izracunKolicineTogFramea
   }  
 
-  console.log("inicijalna kosarica, ", kosaricaValue)
-  function ispisFrameBuildera(s){
-    setFrameBuilder(s)
-    console.log("mjenja se na: ",s)
-  }
+  
   return (
     <div className="App">
       <KosaricaContext.Provider value={kosaricaValue}>

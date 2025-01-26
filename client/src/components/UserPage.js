@@ -34,14 +34,14 @@ function UserPage({children}){
     }
     return (
         <div class="topDiv w3-teal w3-container">
-                <div id="userPageHeading" style={headerStyle} className="w3-red"> 
-                    <Link style={{alignSelf: "flex-start"}} to="/">Home</Link>
-                    <div style={nameAndLogoutStyle}>
-                        <IkonaKosarica/>
-                        <UserStatus/>
-                    </div>
+            <div id="userPageHeading" style={headerStyle} className="w3-blue-gray"> 
+                <Link style={{alignSelf: "flex-start"}} to="/">Home</Link>
+                <div style={nameAndLogoutStyle}>
+                    <IkonaKosarica/>
+                    <UserStatus/>
                 </div>
-            <div id="userPageMain">
+            </div>
+            <div id="userPageMain" class= "w3-container w3-section">
                 {children}
             </div>
         </div>

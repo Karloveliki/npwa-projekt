@@ -18,10 +18,21 @@ function BuilderFrameSelector(){
     const kosarica=useContext(KosaricaContext)
 
     return <div>
-        <SelectFrameBuilder onSelect={onFrameBuilderSelect} />
-        {frameBuilder ? <SelectFrame frameBuilderId={frameBuilder._id} onSelect={onFrameSelect}/>: null}
-        {frameBuilder ? frameBuilder.name : null} 
-        {frame ? <div><Link to={`/details/${frame._id}`}>{frame.name}</Link></div>: null}
+        <div className="w3-container w3-section">
+            <h2 className="w3-section">Magic cycles</h2>
+            <div className="w3-cell-row w3-section">
+                <div className="w3-twothird">
+                
+                    <SelectFrameBuilder onSelect={onFrameBuilderSelect} />
+                </div>
+                <div className="w3-third">
+                    {frameBuilder ? <SelectFrame frameBuilderId={frameBuilder._id} onSelect={onFrameSelect}/>: null}
+                    {frameBuilder ? frameBuilder.name : null} 
+                    {frame ? <div><Link to={`/details/${frame._id}`}>{frame.name}</Link></div>: null}
+                </div>
+            </div>
+
+        </div>
     </div>
 }
 export default BuilderFrameSelector

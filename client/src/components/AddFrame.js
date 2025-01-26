@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 function AddFrame(){
     const params = useParams()
+    const builderName = params.builderName
     const context=useContext(KosaricaContext)
     const user=context.user
     const [greska,setGreska]=useState(null)
@@ -63,7 +64,7 @@ function AddFrame(){
     if(dodan){
         return <div>
                 <div>uspjesno dodan</div>
-                <Link to={`/admin/frameBuilders/${params.id}`}>Nastavi do frameBuildera</Link>
+                <Link to={`/admin/frameBuilders/${params.id}/${builderName}`}>Natrag na {`${builderName}`}</Link>
             </div>
     }
     return <form onSubmit={(ev)=>{addingFrames(ev)}}>

@@ -96,7 +96,7 @@ function App() {
     <KosaricaContext.Provider value={kosaricaValue}>
       <Router>
         <Routes>
-          <Route path="/admin/frameBuilders/:id/addFrame" element={<AdminContent><AddFrame/></AdminContent>}/>
+          <Route path="/admin/frameBuilders/addFrame/:id/:builderName" element={<AdminContent><AddFrame/></AdminContent>}/>
           <Route path="/admin/addBuilder" element={<AdminContent><AddFrameBuilders/></AdminContent>}/>
           <Route path="/admin/frameBuilders/:id/:name" element={<AdminContent><AdminFrameBuilder/></AdminContent>}/>
           <Route path="/admin" element={<AdminContent><AdminPage/></AdminContent>}/>

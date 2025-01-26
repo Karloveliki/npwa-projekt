@@ -101,7 +101,7 @@ function BrisiButon({frameId, onDelete}){
                     </div>
                     <div className="w3-third w3-container">
                         <Link className="w3-button w3-xlarge w3-round-large w3-blue"
-                        to={`/admin/frameBuilders/${frameBuilderId}/addFrame`}>dodaj novi frame</Link>
+                        to={`/admin/frameBuilders/addFrame/${frameBuilderId}/${frameBuilderName}`}>dodaj novi frame</Link>
                     </div>
                 </div>
             </div>  

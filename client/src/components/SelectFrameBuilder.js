@@ -9,7 +9,7 @@ function FrameBuilderList({frameBuilders, onSelect}) {
         <ul className="w3-ul  w3-card-4 w3-pale-blue">
             {frameBuilders.map((frameBuilder)=>{
                 return (
-                    <li className="w3-bar">
+                    <li key={frameBuilder._id} onClick={()=>{console.log("usa");onSelect()}} className="w3-bar">
                         <div className="w3-bar-item">
                             <span class="w3-large">{frameBuilder.name}</span>
                         </div>
@@ -80,7 +80,7 @@ function SelectFrameBuilder({onSelect}){
         <>
             {loading ? <div>loading</div>: null}
             {greska ? <div>{greska}</div>: null}
-            {frBuilders ? <FrameBuilderList frameBuilders={frBuilders} onSelection={internalOnSelect} /> : null}
+            {frBuilders ? <FrameBuilderList frameBuilders={frBuilders} onSelect={internalOnSelect} /> : null}
         </>
     )
 }

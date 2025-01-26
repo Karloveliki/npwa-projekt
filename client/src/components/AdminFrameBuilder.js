@@ -33,8 +33,8 @@ function BrisiButon({frameId, onDelete}){
         onDelete()
     }
 
-    return <span>
-            <button onClick={()=>{deleteFrame(frameId)}}>obrisi</button>
+    return <span onClick={()=>{deleteFrame(frameId)}} class="w3-bar-item w3-button w3-white w3-xlarge w3-right">
+            x
             {greska ? <div>greska</div>: null}
             {load ? <div>loading</div>: null}
             </span>
@@ -79,13 +79,25 @@ function BrisiButon({frameId, onDelete}){
                () => { getFramesForBuilder()},
                []
             )
+        
+        function oneFrame (frame){
+            return (
+                <li className="w3-bar">
+                    <div className="w3-bar-item">
+                        <span class="w3-large">{frame.name}</span>
+                    </div>
+                    <BrisiButon frameId={frame._id} onDelete={getFramesForBuilder}>Obrisi</BrisiButon>
+                </li>
+            )
+        }
         return (
             <div className="w3-container w3-section">
-                <h2>{frameBuilderName}</h2>
+                <h2 className="w3-section">{frameBuilderName}</h2>
                 <div className="w3-cell-row w3-section">
                     <div className="w3-twothird">
-                        {frames ? frames.map((frame)=>{ return <div key={frame._id}>{frame.name}<BrisiButon frameId={frame._id}
-                        onDelete={getFramesForBuilder}/></div>}) : null}
+                        <ul className="w3-ul  w3-card-4 w3-pale-blue">
+                        {frames ? frames.map((frame)=>{ return oneFrame(frame)}) : null}
+                        </ul>
                     </div>
                     <div className="w3-third w3-container">
                         <Link to={`/admin/frameBuilders/${frameBuilderId}/addFrame`}>doaj novi frame</Link>
@@ -97,3 +109,6 @@ function BrisiButon({frameId, onDelete}){
 }
 
 export default AdminFrameBuilder
+
+// (<div key={frame._id}>{frame.name}<BrisiButon frameId={frame._id}
+//onDelete={getFramesForBuilder}/></div>)

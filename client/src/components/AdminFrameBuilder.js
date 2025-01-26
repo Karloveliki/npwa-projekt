@@ -33,7 +33,7 @@ function BrisiButon({frameId, onDelete}){
         onDelete()
     }
 
-    return <span onClick={()=>{deleteFrame(frameId)}} class="w3-bar-item w3-button w3-white w3-xlarge w3-right">
+    return <span onClick={()=>{deleteFrame(frameId)}} className="w3-bar-item w3-button w3-white w3-xlarge w3-right">
             x
             {greska ? <div>greska</div>: null}
             {load ? <div>loading</div>: null}
@@ -84,7 +84,7 @@ function BrisiButon({frameId, onDelete}){
             return (
                 <li className="w3-bar">
                     <div className="w3-bar-item">
-                        <span class="w3-large">{frame.name}</span>
+                        <span className="w3-large">{frame.name}</span>
                     </div>
                     <BrisiButon frameId={frame._id} onDelete={getFramesForBuilder}>Obrisi</BrisiButon>
                 </li>

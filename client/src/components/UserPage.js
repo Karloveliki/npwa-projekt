@@ -26,14 +26,14 @@ function UserPage({children}){
     
 
     if(!user){
-        return <div class="topDiv w3-teal w3-container">
+        return <div className="topDiv w3-teal w3-container">
 
                     <div>Za pristup stranici trebate biti prijavljeni</div>
                     <Link to={'/login'}>Prijavite se</Link>
               </div>
     }
     return (
-        <div class="topDiv w3-teal w3-container">
+        <div className="topDiv w3-teal w3-container">
             <div id="userPageHeading" style={headerStyle} className="w3-blue-gray"> 
                 <Link style={{alignSelf: "flex-start"}} to="/">Home</Link>
                 <div style={nameAndLogoutStyle}>
@@ -41,7 +41,7 @@ function UserPage({children}){
                     <UserStatus/>
                 </div>
             </div>
-            <div id="userPageMain" class= "w3-container w3-section">
+            <div id="userPageMain" className= "w3-container w3-section">
                 {children}
             </div>
         </div>

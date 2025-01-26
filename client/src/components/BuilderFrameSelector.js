@@ -23,7 +23,7 @@ function BuilderFrameSelector(){
             <div className="w3-cell-row w3-section">
                 <div className="w3-half w3-container">
                     <h3 className="w3-section">Proizvođač:</h3>
-                    <SelectFrameBuilder onSelect={onFrameBuilderSelect} />
+                    <SelectFrameBuilder onSelect={onFrameBuilderSelect} frameBuilder={frameBuilder} />
                 </div>
                 <div className="w3-half w3-container">
                     {frameBuilder ? <h3 className="w3-section">{frameBuilder.name} okviri:</h3> : null} 

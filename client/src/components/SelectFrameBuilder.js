@@ -4,17 +4,31 @@ import { useContext } from "react";
 import KosaricaContext from "../KosaricaContext";
 
 
-function FrameBuilderList({frameBuilders, onSelect}) {
+function FrameBuilderList({frameBuilders, onSelect,selected}) {
+   
     return (
         <ul className="w3-ul  w3-card-4 w3-pale-blue">
             {frameBuilders.map((frameBuilder)=>{
-                return (
+                console.log("frBuilders:   ",frameBuilder)
+                if(selected && frameBuilder._id==selected._id){
+                    return (
+                        <li key={frameBuilder._id} onClick={()=>{onSelect(frameBuilder._id)}}
+                    className="w3-bar w3-purple">
+                        <div className="w3-bar-item">
+                            <span className="w3-large">{frameBuilder.name}</span>
+                        </div>
+                    </li>
+                    )
+                }
+                return(
+    
                     <li key={frameBuilder._id} onClick={()=>{onSelect(frameBuilder._id)}}
                     className="w3-bar">
                         <div className="w3-bar-item">
                             <span className="w3-large">{frameBuilder.name}</span>
                         </div>
                     </li>
+               
                 )
 
             })
@@ -23,7 +37,7 @@ function FrameBuilderList({frameBuilders, onSelect}) {
     )
 }
 
-function SelectFrameBuilder({onSelect}){
+function SelectFrameBuilder({onSelect,frameBuilder}){
   const context=useContext(KosaricaContext)
   const user=context.user
   const[frBuilders,setFrBuilders]=useState([])
@@ -82,7 +96,7 @@ function SelectFrameBuilder({onSelect}){
         <>
             {loading ? <div>loading</div>: null}
             {greska ? <div>{greska}</div>: null}
-            {frBuilders ? <FrameBuilderList frameBuilders={frBuilders} onSelect={internalOnSelect} /> : null}
+            {frBuilders ? <FrameBuilderList frameBuilders={frBuilders} onSelect={internalOnSelect} selected={frameBuilder} /> : null}
         </>
     )
 }

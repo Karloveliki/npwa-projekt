@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function FrameList({frames}){
     const navigate=useNavigate()
+    const [builderId,setBuilderId]=useState(null)
     return(
         <ul className="w3-ul  w3-card-4 w3-pale-blue">
             { frames.map((frame)=>{
@@ -16,7 +17,7 @@ function FrameList({frames}){
                                 className="w3-large">{frame.name}</span>
                             </div>
                         </li>
-                        )
+                    )
             })
             }
         </ul>
@@ -24,14 +25,12 @@ function FrameList({frames}){
 }
 //{frames ? <DropDown options={putInDropDown(frames)} onSelectionChange={internalOnSelect}></DropDown>: null}
 
-function SelectFrame({frameBuilderId,onSelect}){
+function SelectFrame({frameBuilderId}){
     const context=useContext(KosaricaContext)
     const user=context.user
     const[frames,setFrames]=useState([])
     const [greska,setGreska]=useState("")
     const [loading,setLoading]=useState(false)
-
-    
     async function catchFrames(){
         try{
             const requestOptions = {

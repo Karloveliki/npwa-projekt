@@ -2,6 +2,24 @@
 import DropDown from "./DropDown";
 import { useState,useEffect,useContext } from "react";
 import KosaricaContext from "../KosaricaContext";
+
+function FrameList({frames,onSelecttionChange}){
+    return(
+        <ul className="w3-ul  w3-card-4 w3-pale-blue">
+            { frames.map((frame)=>{
+                return (<li key={frame._id} onClick={()=>{onSelecttionChange(frame._id)}} className="w3-bar">
+                            <div className="w3-bar-item">
+                                <span className="w3-large">{frame.name}</span>
+                            </div>
+                        </li>
+                        )
+            })
+            }
+        </ul>
+    )
+}
+//{frames ? <DropDown options={putInDropDown(frames)} onSelectionChange={internalOnSelect}></DropDown>: null}
+
 function SelectFrame({frameBuilderId,onSelect}){
     const context=useContext(KosaricaContext)
     const user=context.user
@@ -53,10 +71,10 @@ function SelectFrame({frameBuilderId,onSelect}){
        [frameBuilderId]
     )
 
-    return <div>
+    return <>
             {loading ? <p>loading</p>: null}
             {greska ? <p>{greska}</p>:null}
-            {frames ? <DropDown options={putInDropDown(frames)} onSelectionChange={internalOnSelect}></DropDown>: null}
-    </div>
+            {frames? <FrameList frames={putInDropDown(frames)} onSelecttionChange={internalOnSelect}/>:null}
+    </>
 }
 export default SelectFrame

@@ -9,7 +9,8 @@ function FrameBuilderList({frameBuilders, onSelect}) {
         <ul className="w3-ul  w3-card-4 w3-pale-blue">
             {frameBuilders.map((frameBuilder)=>{
                 return (
-                    <li key={frameBuilder._id} onClick={()=>{console.log("usa");onSelect(frameBuilder._id)}} className="w3-bar">
+                    <li key={frameBuilder._id} onClick={()=>{onSelect(frameBuilder._id)}}
+                    className="w3-bar">
                         <div className="w3-bar-item">
                             <span className="w3-large">{frameBuilder.name}</span>
                         </div>

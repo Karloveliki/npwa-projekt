@@ -1,18 +1,63 @@
 function DataFrame({dict}){
     console.log("idct: ",dict)
-    return <div className="w3-cell-row">
-        <div className="w3-third  w3-red w3-container w3-cell w3-cell-row">
-            <ul>
-            <div>name: {dict.name}</div>
-            <div>bike type: {dict.bikeType}</div>
-            <div>geometry type: {dict.geometry_type}</div>
-            <div>wheel size: {dict.wheelSize}</div>
-            <div>suspension: {dict.suspension}</div>
-            <div>material: {dict.material}</div>
-            <div>available sizes: {dict.availableSizes.map((el)=>{return <p>{el}</p>})}</div>
-            <div>base price:{dict.basePrice}</div>
-            <div>down payment: {dict.downPayment}</div>
-            <div>fork included:{`${dict.forkIncluded}`}</div>
+
+    function convertArrayToStr(arr){
+        const str=arr.join(",")
+        return str
+    }
+    return <div className="w3-cell-row w3-section">
+        <div className="w3-third w3-container w3-cell">
+            <ul className="w3-ul w3-pale-blue">
+                <li className="w3-bar">
+                    <div className="w3-bar-item w3-large w3-left">name </div>
+                    <div className="w3-bar-item w3-large  w3-right">
+                        {dict.name}
+                    </div>
+                </li> 
+
+                <li className="w3-bar">
+                    <div className="w3-bar-item w3-large w3-left">bike type </div>
+                    <div className="w3-bar-item w3-large w3-right">{dict.bikeType}</div>
+                </li>
+
+                <li className="w3-bar">
+                    <div className="w3-bar-item w3-large w3-left">geometry type</div>
+                    <div className="w3-bar-item w3-large w3-right">{dict.geometry_type}</div>
+                </li>
+
+                <li className="w3-bar">
+                    <div className="w3-bar-item w3-large w3-left">wheel size </div>
+                    <div className="w3-bar-item w3-large w3-right">{dict.wheelSize}</div>
+                </li>
+
+                <li className="w3-bar">
+                    <div className="w3-bar-item w3-large w3-left">suspension </div>
+                    <div className="w3-bar-item w3-large w3-right">{dict.suspension}</div>
+                </li>
+                
+                <li className="w3-bar">
+                    <div className="w3-bar-item w3-large w3-left">material </div>
+                    <div className="w3-bar-item w3-large w3-right">{dict.material}</div>
+                </li>
+
+                <li className="w3-bar">
+                    <div className="w3-bar-item w3-large w3-left" >available sizes </div>
+                    <div className="w3-bar-item w3-large w3-right">{convertArrayToStr(dict.availableSizes)}</div>
+                </li>
+                <li className="w3-bar">
+                    <div className="w3-bar-item w3-large w3-left">base price</div>
+                    <div className="w3-bar-item w3-large w3-right">{dict.basePrice}</div>
+                </li>
+
+                <li className="w3-bar">
+                    <div  className="w3-bar-item w3-large w3-left">down payment </div>
+                    <div className="w3-bar-item w3-large w3-right">{dict.downPayment}</div>
+                </li>
+
+                <li className="w3-bar">
+                    <div  className="w3-bar-item w3-large w3-left">fork included</div>
+                    <div className="w3-bar-item w3-large w3-right">{`${dict.forkIncluded}`}</div>
+                </li>
             </ul>
         </div>
     

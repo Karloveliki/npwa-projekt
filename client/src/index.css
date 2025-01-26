@@ -3,6 +3,6 @@
     top: 0; /* Position it at the top edge */
     left: 0; /* Position it at the left edge */
     width: 100%; /* Make it as wide as the body */
-    height: 100%; /* Make it as tall as the body */
+    height: 300%; /* Make it as tall as the body */
     z-index: -1; /* Send it behind other content, if necessary */    
 }

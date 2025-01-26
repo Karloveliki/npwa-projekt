@@ -62,8 +62,14 @@ function FramePage(){
         setDodano(false)
         navigate("/shoppingCart")
     }
-
+    if(!frame){
+        return <div>
+            loading...
+        </div>
+    }
+    console.log("frame: ",frame)
     return <div>
+        <h1>{frame.frameBuilder.name}: {frame.name}</h1>
         <button onClick={dodajUKosaricu}>dodaj u kosaricu</button>
         <Modal open={dodano}>
             <Dodano visible={dodano} onDa={da} onNe={ne} /> 

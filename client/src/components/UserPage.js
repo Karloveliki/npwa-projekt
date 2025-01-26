@@ -8,6 +8,23 @@ import UserStatus from "./UserStatus"
 function UserPage({children}){
     const context=useContext(KosaricaContext)
     const user=context.user
+
+    const headerStyle = {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'bottom',
+        padding: '10px',
+    };
+
+    const nameAndLogoutStyle = {
+        display:'flex',
+        alignItems: 'bottom',
+        alignSelf: 'flex-end',
+        marginLeft: '10px',
+    }
+    
+
     if(!user){
         return <div class="topDiv w3-teal w3-container">
 
@@ -17,10 +34,12 @@ function UserPage({children}){
     }
     return (
         <div class="topDiv w3-teal w3-container">
-                <div id="userPageHeading"> 
-                    <Link to="/">Home</Link>
-                    <IkonaKosarica/>
-                  <UserStatus/>
+                <div id="userPageHeading" style={headerStyle} className="w3-red"> 
+                    <Link style={{alignSelf: "flex-start"}} to="/">Home</Link>
+                    <div style={nameAndLogoutStyle}>
+                        <IkonaKosarica/>
+                        <UserStatus/>
+                    </div>
                 </div>
             <div id="userPageMain">
                 {children}

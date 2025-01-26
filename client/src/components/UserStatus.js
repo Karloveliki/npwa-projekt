@@ -18,10 +18,13 @@ function UserStatus(){
         context.setUser(null)
         navigate('/')
     }
+    const nameStyle = {
+        marginRight: '10px'
+    }
     return <div>
         {context.user? 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }} >
-            <div>{userName}</div>
+            <div style={nameStyle}>{userName}</div>
             <button onClick={userLogout}>Odjava</button>
         </div>
         :<Link to='/login'>Login Page</Link>

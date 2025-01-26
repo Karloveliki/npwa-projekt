@@ -3,6 +3,25 @@ import DropDown from "./DropDown";
 import { useContext } from "react";
 import KosaricaContext from "../KosaricaContext";
 
+
+function FrameBuilderList({frameBuilders, onSelect}) {
+    return (
+        <ul className="w3-ul  w3-card-4 w3-pale-blue">
+            {frameBuilders.map((frameBuilder)=>{
+                return (
+                    <li className="w3-bar">
+                        <div className="w3-bar-item">
+                            <span class="w3-large">{frameBuilder.name}</span>
+                        </div>
+                    </li>
+                )
+
+            })
+            }
+        </ul>
+    )
+}
+
 function SelectFrameBuilder({onSelect}){
   const context=useContext(KosaricaContext)
   const user=context.user
@@ -57,14 +76,13 @@ function SelectFrameBuilder({onSelect}){
         []
     )
 
-    return <div>
-        {loading ? <div>loading</div>: null}
-        {greska ? <p>{greska}</p>: null}
-        {frBuilders ? <DropDown options={putInDropDown(frBuilders)} onSelectionChange={internalOnSelect} /> : null}
-
-
-    </div>
-    
+    return (
+        <>
+            {loading ? <div>loading</div>: null}
+            {greska ? <div>{greska}</div>: null}
+            {frBuilders ? <FrameBuilderList frameBuilders={frBuilders} onSelection={internalOnSelect} /> : null}
+        </>
+    )
 }
 
 export default SelectFrameBuilder

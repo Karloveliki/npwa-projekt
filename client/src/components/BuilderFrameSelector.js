@@ -27,7 +27,7 @@ function BuilderFrameSelector(){
                 </div>
                 <div className="w3-half w3-container">
                     {frameBuilder ? <h3 className="w3-section">{frameBuilder.name} okviri:</h3> : null} 
-                    {frameBuilder ? <SelectFrame frameBuilderId={frameBuilder._id} onSelect={onFrameSelect}/>: null}
+                    {frameBuilder ? <SelectFrame frameBuilderId={frameBuilder._id} />: null}
                     {frame ? <div><Link to={`/details/${frame._id}`}>{frame.name}</Link></div>: null}
                 </div>
             </div>

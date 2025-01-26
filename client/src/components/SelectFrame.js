@@ -5,14 +5,15 @@ import KosaricaContext from "../KosaricaContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function FrameList({frames,onSelecttionChange}){
+function FrameList({frames}){
     const navigate=useNavigate()
     return(
         <ul className="w3-ul  w3-card-4 w3-pale-blue">
             { frames.map((frame)=>{
-                return (<li key={frame._id} onClick={()=>{onSelecttionChange(frame.value)}} className="w3-bar">
+                return (<li key={frame.value}  className="w3-bar">
                             <div className="w3-bar-item">
-                                <span onClick={()=>{navigate(`/details/${frame.value}`)}} className="w3-large">{frame.name}</span>
+                                <span onClick={()=>{navigate(`/details/${frame.value}`)}} 
+                                className="w3-large">{frame.name}</span>
                             </div>
                         </li>
                         )
@@ -64,12 +65,12 @@ function SelectFrame({frameBuilderId,onSelect}){
         })
         return frameList
     }
-    function internalOnSelect(match){
+   /* function internalOnSelect(match){
         //console.log("match:   ",match)
         const rez= frames.filter((frame)=>{return frame._id==match})
         //console.log("rez[0   ",rez[0])
         onSelect(rez[0])
-    }
+    }*/
     
     useEffect(
        () => { catchFrames()},
@@ -79,7 +80,7 @@ function SelectFrame({frameBuilderId,onSelect}){
     return <>
             {loading ? <p>loading</p>: null}
             {greska ? <p>{greska}</p>:null}
-            {frames? <FrameList frames={putInDropDown(frames)} onSelecttionChange={internalOnSelect}/>:null}
+            {frames? <FrameList frames={putInDropDown(frames)} />:null}
     </>
 }
 export default SelectFrame

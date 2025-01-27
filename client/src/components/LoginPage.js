@@ -4,8 +4,7 @@ import { Link } from "react-router-dom"
 function LoginPage(){
 
     return <div>
-        <Login/>
-        <Link to='/register'>Registracija</Link>
+        <Login/>    
     </div>
 }
 export default LoginPage

@@ -10,10 +10,10 @@ function IkonaKosarica(){
             <div>
             <div>kolicina:{kosarica.izracunajKolicinu()}</div> 
             <p>price:{kosarica.izracunajPrice()}</p>
-            <Link to={"/shoppingCart"}>Kosarica detalji</Link>
+            <Link to={"/shoppingCart"}>KOsarica detalji</Link>
             </div>:
             <div>Kosarica je prazna</div>
-           } 
+        } 
             
             
     

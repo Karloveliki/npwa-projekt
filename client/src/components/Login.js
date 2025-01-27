@@ -1,7 +1,7 @@
 import KosaricaContext from "../KosaricaContext";
 import { useState , useContext} from "react";
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 function Login(){
     const [greska,setGreska]=useState(false)
     const [load,setLoad]=useState(false)
@@ -43,16 +43,23 @@ function Login(){
         navigate('/');
     }
 
-    return <div >
-        <form  onSubmit={(ev)=>{login(ev)}} > 
-            <label htmlFor="uname">Korisnicko ime:</label><br/>
-            <input type="text" id="uname" name="uname"/><br/>
-            <label htmlFor="password">Lozinka</label><br/>
-            <input type="password" id="password" name="password"/><br/>
-            {load ? <button type="submit" disabled >Login</button>:<button type="submit">Login</button>}
-        </form>
-        {greska ? <div>Greska pri loginu</div>:null}
+    return <div className="w3-container w3-display-topmiddle w3-padding-large w3-margin-bottom" >
+            <h1>Magic Cycles Frame Shop</h1>
 
-    </div>
+            <div className="w3-card-4 w3-padding-large w3-light-gray">
+                <form className="w3-container" onSubmit={(ev)=>{login(ev)}} > 
+                    <label  htmlFor="uname">Korisnicko ime:</label><br/>
+                    <input className="w3-input w3-border w3-margin-bottom" type="text" id="uname" name="uname" /><br/>
+                    <label htmlFor="password" style={{ marginBottom: '10px' }}>Lozinka</label><br/>
+                    <input  className="w3-input w3-border w3-margin-bottom" type="password" id="password" name="password"/><br/>
+                    {load ? <button type="submit" disabled >Login</button>:<button type="submit" >Login</button>}
+                </form>
+                
+                {greska ? <div>Greska pri loginu</div>:null}
+            </div>
+            <div className="w3-container w3-margin-top  ">
+                <Link className=" w3-xlarge w3-center w3-button " to='/register'>Ili se registrirajte</Link>
+            </div>
+        </div>
 }
 export default Login

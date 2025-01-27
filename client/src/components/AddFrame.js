@@ -67,85 +67,100 @@ function AddFrame(){
                 <Link to={`/admin/frameBuilders/${params.id}/${builderName}`}>Natrag na {`${builderName}`}</Link>
             </div>
     }
-    return <form onSubmit={(ev)=>{addingFrames(ev)}}>
-        {greska ? <div>greska</div>: null}
-        {load ? <div>loading</div>: null}
-        <label htmlFor="name"> name</label><br/>
-        <input type="text" id="name" name="name"/><br/>
-        <label htmlFor="bikeType">bike type: </label><br/>
-        <select name="bikeType" id="bikeType" defaultValue='road'>
-            <option value="road">road</option>
-            <option value="mtb">mtb</option>
-            <option value="trekking">trekking</option>
-            <option value="gravel">gravel</option>
-            <option value="city">city</option>
-            <option value="cargo">cargo</option>
-            <option value="bmx">bmx</option>
-        </select><br/>
-
-        <label htmlFor="geometryType">geometry type</label><br/>
-        <select name="geometryType" id="geometryType" defaultValue='universal'>
-            <option value="man">man</option>
-            <option value="women">women</option>
-            <option value="universal">universal</option>
-        </select><br/>
-
-        <label htmlFor="wheelSize">wheel size</label><br/>
-        <select name="wheelSize" id="wheelSize" defaultValue='20"'>
-            <option value='20"'>20"</option>
-            <option value='24"'>24"</option>
-            <option value='26"'>26"</option>
-            <option value='27.5"'>27.5"</option>
-            <option value='28"'>28"</option>
-            <option value='29"'>29"</option>
-            <option value='12"'>12"</option>
-            <option value='16"'>16"</option>
-        </select><br/>
-
-        <label htmlFor="suspension">suspension: </label><br/>
-        <select name="suspension" id="suspension" defaultValue='no'>
-            <option value='no'>no</option>
-            <option value='front'>front</option>
-            <option value='back'>back</option>
-            <option value='full'>full</option>
-        </select><br/>
+    return<div className="w3-container w3-display-topmiddle w3-padding-large w3-margin-bottom" >
+        <div className="w3-container w3-margin-top">
+            <h1 className="w3-center">Novi Frame Builder</h1>
+        </div>
+        <div className="w3-card-4 w3-padding-large w3-light-gray w3-display-container">
+            <form onSubmit={(ev)=>{addingFrames(ev)}}>
+                {greska ? <div>greska</div>: null}
+                {load ? <div>loading</div>: null}
+                <label htmlFor="name"> Name</label><br/>
+                <input className="w3-input w3-border w3-margin-bottom" type="text" id="name" name="name"/><br/>
         
-        <label htmlFor="material">material: </label><br/>
-        <select name="material" id="material" defaultValue='steel'>
-            <option value='steel'>steel</option>
-            <option value='aluminium'>aluminium</option>
-            <option value='titan"'>titan</option>
-            <option value='carbon'>carbons</option>
-        </select><br/>
+                <label htmlFor="bikeType">Bike type: </label><br/>
+                <select className="w3-input w3-border w3-margin-bottom w3-padding-small"
+                 name="bikeType" id="bikeType" defaultValue='road'>
+                    <option value="road">Road</option>
+                    <option value="mtb">Mtb</option>
+                    <option value="trekking">Trekking</option>
+                    <option value="gravel">Gravel</option>
+                    <option value="city">City</option>
+                    <option value="cargo">Cargo</option>
+                    <option value="bmx">Bmx</option>
+                </select><br/>
 
+                <label htmlFor="geometryType">Geometry type</label><br/>
+                <select className="w3-input w3-border w3-margin-bottom w3-padding-small"
+                 name="geometryType" id="geometryType" defaultValue='universal'>
+                    <option value="man">Man</option>
+                    <option value="women">Women</option>
+                    <option value="universal">Universal</option>
+                </select><br/>
 
-        <label htmlFor="availableSizes"> availableSizes</label><br/>
-        <select name="availableSizes" id="availableSizes" defaultValue={['56']} multiple>
-            <option value='47'>47</option>
-            <option value='50'>50</option>
-            <option value='52'>52</option>
-            <option value='54'>54</option>
-            <option value='56'>56</option>
-            <option value='58'>58</option>
-            <option value='60'>60</option>
-            <option value='62'>62</option>
-            <option value='XS'>XS</option>
-            <option value='S'>S</option>
-            <option value='M'>M</option>
-            <option value='M/L'>M/L</option>
-            <option value='L'>L</option>
-            <option value='XL'>XL</option>
-            <option value='XXL'>XXL</option>
-        </select><br/>
-        <label htmlFor="images"> images </label><br/>
-        <input type="text" id="images" name="imagess"/><br/>
-        <label htmlFor="basePrice"> basePrice </label><br/>
-        <input type="text" id="basePrice" name="basePrice"/><br/>
-        <label htmlFor="downPayment"> downPayment </label><br/>
-        <input type="text" id="downPayment" name="downPayment"/><br/>
-        <label htmlFor="forkIncluded"> forkIncluded </label><br/>
-        <input type="checkbox" id="vilica" name="vilica"/><br/>
-        <button type="submit">dodaj</button>
-    </form> 
+                <label htmlFor="wheelSize">Wheel size</label><br/>
+                <select className="w3-input w3-border w3-margin-bottom w3-padding-small"
+                 name="wheelSize" id="wheelSize" defaultValue='20"'>
+                    <option value='20"'>20"</option>
+                    <option value='24"'>24"</option>
+                    <option value='26"'>26"</option>
+                    <option value='27.5"'>27.5"</option>
+                    <option value='28"'>28"</option>
+                    <option value='29"'>29"</option>
+                    <option value='12"'>12"</option>
+                    <option value='16"'>16"</option>
+                </select><br/>
+
+                <label htmlFor="suspension">Suspension: </label><br/>
+                <select className="w3-input w3-border w3-margin-bottom w3-padding-small"
+                 name="suspension" id="suspension" defaultValue='no'>
+                    <option value='no'>No</option>
+                    <option value='front'>Front</option>
+                    <option value='back'>Back</option>
+                    <option value='full'>Full</option>
+                </select><br/>
+                
+                <label htmlFor="material">Material: </label><br/>
+                <select className="w3-input w3-border w3-margin-bottom w3-padding-small"
+                 name="material" id="material" defaultValue='steel'>
+                    <option value='steel'>Steel</option>
+                    <option value='aluminium'>Aluminium</option>
+                    <option value='titan"'>Titan</option>
+                    <option value='carbon'>Carbon</option>
+                </select><br/>
+
+                <label htmlFor="availableSizes"> Available Sizes</label><br/>
+                <select className="w3-input w3-border w3-margin-bottom w3-padding-small" 
+                name="availableSizes" id="availableSizes" defaultValue={['56']} multiple>
+                    <option value='47'>47</option>
+                    <option value='50'>50</option>
+                    <option value='52'>52</option>
+                    <option value='54'>54</option>
+                    <option value='56'>56</option>
+                    <option value='58'>58</option>
+                    <option value='60'>60</option>
+                    <option value='62'>62</option>
+                    <option value='XS'>XS</option>
+                    <option value='S'>S</option>
+                    <option value='M'>M</option>
+                    <option value='M/L'>M/L</option>
+                    <option value='L'>L</option>
+                    <option value='XL'>XL</option>
+                    <option value='XXL'>XXL</option>
+                </select><br/>
+                <label htmlFor="images"> Images </label><br/>
+                <input className="w3-input w3-border w3-margin-bottom" type="text" id="images" name="imagess"/><br/>
+                <label htmlFor="basePrice"> Base Price </label><br/>
+                <input className="w3-input w3-border w3-margin-bottom" type="text" id="basePrice" name="basePrice"/><br/>
+                <label htmlFor="downPayment"> Down Payment </label><br/>
+                <input className="w3-input w3-border w3-margin-bottom" type="text" id="downPayment" name="downPayment"/><br/>
+                <label htmlFor="forkIncluded">Is Fork included </label>
+                <input className="w3-input w3-border w3-margin-bottom" type="checkbox" id="vilica" name="vilica"/><br/>
+                <div className="w3-center">
+                    <button className="w3-centre w3-margin-left" type="submit">Dodaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
 }
 export default AddFrame

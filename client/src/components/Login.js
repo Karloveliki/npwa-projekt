@@ -55,8 +55,9 @@ function Login(){
                     {load ? <button type="submit" disabled >Login</button>:<button type="submit" >Login</button>}
                 </form>
                 
-                {greska ? <div>Greska pri loginu</div>:null}
+                
             </div>
+            {greska ? <div className="w3-large w3-red">Greska pri loginu</div>:null}
             <div className="w3-container w3-margin-top  ">
                 <Link className=" w3-xlarge w3-center w3-button " to='/register'>Ili se registrirajte</Link>
             </div>

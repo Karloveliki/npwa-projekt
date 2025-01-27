@@ -74,17 +74,12 @@ function FramePage(){
                 <button className="w3-btn w3-round w3-blue" onClick={dodajUKosaricu}>dodaj u kosaricu</button>
             </div>
         
-        
         <Modal open={dodano}>
             <Dodano visible={dodano} onDa={da} onNe={ne} /> 
         </Modal>
-        <p>{kosarica.izracunKolicineTogFramea(frameId)}</p>
         {loading ? <div>loading</div>: null}
         {greska ? <div>{greska}</div>: null}
         {frame ? <DataFrame dict={frame}/>: null}
-        <div>
-            <Link to={"/"}>Home</Link>
-        </div>
     </div>
 }
 export default FramePage

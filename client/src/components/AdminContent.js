@@ -12,8 +12,13 @@ function AdminContent({children}){
         navigate('/')
     }
     if(!user || user.userType!="admin"){
-        return <div className="topDiv w3-gray w3-container"><div>Za pristup administratorskim stranicama trebate biti prijavljeni kao admin</div>
-                <Link to={'/login'}>Prijavite se kao admin</Link>
+        return <div className="topDiv w3-gray w3-container">
+                    <div className="w3-xxlarge w3-center w3-padding-64">
+                    Za pristup administratorskim stranicama 
+                    trebate biti prijavljeni kao admin</div>
+                    <div className="w3-center">
+                        <Link className="w3-xxlarge" to={'/login'}>Prijavite se kao admin</Link>
+                    </div>
               </div>
     }
 

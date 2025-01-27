@@ -69,7 +69,7 @@ function AddFrame(){
     }
     return<div className="w3-container w3-display-topmiddle w3-padding-large w3-margin-bottom" >
         <div className="w3-container w3-margin-top">
-            <h1 className="w3-center">Novi Frame Builder</h1>
+            <h1 className="w3-center">Novi Frame </h1>
         </div>
         <div className="w3-card-4 w3-padding-large w3-light-gray w3-display-container">
             <form onSubmit={(ev)=>{addingFrames(ev)}}>

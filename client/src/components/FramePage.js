@@ -69,8 +69,12 @@ function FramePage(){
     }
     console.log("frame: ",frame)
     return <div>
-        <h1>{frame.frameBuilder.name}: {frame.name}</h1>
-        <button onClick={dodajUKosaricu}>dodaj u kosaricu</button>
+            <div className="w3-container" >
+                <h1>{frame.frameBuilder.name}: {frame.name}</h1>
+                <button className="w3-btn w3-round w3-blue" onClick={dodajUKosaricu}>dodaj u kosaricu</button>
+            </div>
+        
+        
         <Modal open={dodano}>
             <Dodano visible={dodano} onDa={da} onNe={ne} /> 
         </Modal>

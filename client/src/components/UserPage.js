@@ -28,8 +28,10 @@ function UserPage({children}){
     if(!user){
         return <div className="topDiv w3-teal w3-container">
 
-                    <div>Za pristup stranici trebate biti prijavljeni</div>
-                    <Link to={'/login'}>Prijavite se</Link>
+                    <div className="w3-xxlarge w3-center w3-padding-64">Za pristup stranici trebate biti prijavljeni</div>
+                    <div className="w3-center">
+                    <Link className="w3-xxlarge " to={'/login'}>Prijavite se</Link>
+                    </div>
               </div>
     }
     return (

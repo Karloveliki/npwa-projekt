@@ -73,7 +73,7 @@ function AddFrame(){
         </div>
         <div className="w3-card-4 w3-padding-large w3-light-gray w3-display-container">
             <form onSubmit={(ev)=>{addingFrames(ev)}}>
-                {greska ? <div>greska</div>: null}
+                
                 {load ? <div>loading</div>: null}
                 <label htmlFor="name"> Name</label><br/>
                 <input className="w3-input w3-border w3-margin-bottom" type="text" id="name" name="name"/><br/>
@@ -161,6 +161,7 @@ function AddFrame(){
                 </div>
             </form>
         </div>
+        {greska ? <div className="w3-red w3-large">greska</div>: null}
     </div>
 }
 export default AddFrame

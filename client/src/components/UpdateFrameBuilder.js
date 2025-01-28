@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import KosaricaContext from '../KosaricaContext';
+import { useNavigate } from "react-router-dom";
 function UpdateFrameBuilder(){
     const params = useParams()
     const frameBuilderId=params.frameBuilderId
@@ -10,7 +11,10 @@ function UpdateFrameBuilder(){
     const [name,setName]=useState('')
     const [country,setCountry]=useState('')
     const [contact,setContact]=useState('')
-
+    const [greska,setGreska]= useState(false)
+    const [dodan,setIfDodan]= useState(false)
+    const[load,setLoad]=useState(false)
+    const navigate=useNavigate()
 
     async  function getFrameBuilder(){
         const requestOptions = {
@@ -30,9 +34,32 @@ function UpdateFrameBuilder(){
         setCountry(dataResponse.country)
         setFrameBuilder(dataResponse)
     }
-    function handleSubmit(ev){
+    async function handleSubmit(ev){
         ev.preventDefault()
         console.log("dodabio submit")
+        setLoad(false)
+        setGreska(false)
+        ev.preventDefault()
+        
+        const requestOptions = {
+            method: 'PUT',
+            redirect: 'follow',
+            headers: {
+                'Content-Type': 'application/json', // Tell the server the data format
+                'Authorization': `Bearer ${user.token}`
+              },
+            body: JSON.stringify({name,country,contact})
+        };
+        setLoad(true)
+        const response = await fetch(`http://localhost:5050/frameBuilders/${frameBuilderId}`, requestOptions)
+        setLoad(false)
+        if(!response.ok){
+            setGreska(true)
+            setIfDodan(false)
+        }
+        else{
+            setIfDodan(true)
+        }
     }
     useEffect(
         () => {getFrameBuilder()},
@@ -41,6 +68,10 @@ function UpdateFrameBuilder(){
      if(!frameBuilder){
         return <div>Loading</div>
      }
+     console.log("dodan:   ",dodan)
+    if(dodan){
+        navigate("/admin")
+    }
     return <div className="w3-container w3-display-topmiddle w3-padding-large w3-margin-bottom" >
     <div className="w3-container w3-margin-top">
         <h1 className="w3-center">Novi Frame Builder</h1>
@@ -57,6 +88,7 @@ function UpdateFrameBuilder(){
             <button className="w3-centre w3-margin-left" type="submit">dodaj</button>
             </div>
         </form> 
+        {greska ? <div>greska</div> : null }
     </div>
 </div>
 }

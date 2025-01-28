@@ -24,8 +24,9 @@ function UserStatus(){
     return <div>
         {context.user? 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }} >
-            <div style={nameStyle}>{userName}</div>
-            <button onClick={userLogout}>Odjava</button>
+            <div className="w3-bar-item w3-medium w3-padding-16" style={nameStyle}>{userName}</div>
+            <button className="w3-bar-item w3-button w3-medium w3-padding-16 w3-theme w3-margin-left"
+            onClick={userLogout}>Odjava</button>
         </div>
         :<Link to='/login'>Login Page</Link>
         }

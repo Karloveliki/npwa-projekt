@@ -37,7 +37,7 @@ function UserPage({children}){
     return (
         <div className="topDiv w3-teal w3-container">
             <div id="userPageHeading" style={headerStyle} className="w3-blue-gray"> 
-                <Link style={{alignSelf: "flex-start"}} to="/">Home</Link>
+                <Link style={{alignSelf: "flex-start", fontSize: "2em"}} to="/">Home</Link>
                 <div style={nameAndLogoutStyle}>
                     <IkonaKosarica/>
                     <UserStatus/>

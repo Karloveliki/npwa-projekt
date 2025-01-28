@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import { useContext } from "react"
 import KosaricaContext from '../KosaricaContext';
 
+
+function Edit({frameBuilderId}){
+    return  <Link to={`/admin/frameBuilders/edit/${frameBuilderId}`}>Edit</Link>
+}
+
 function BrisiButon({frameBuilderId,onDelete}){
     const [load,setLoad]=useState(false)
     const [greska,setGreska]=useState(false)
@@ -92,6 +97,7 @@ function AdminPage(){
                                         <span className="w3-large">{frBuilder.name}</span>
                                     </div>
                                 </Link>
+                                <Edit frameBuilderId={frBuilder._id}></Edit>
                                 {frBuilder.frames.length ?  
                                     null 
                                     :

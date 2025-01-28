@@ -19,6 +19,7 @@ import AddFrame from './components/AddFrame';
 import UserPage from './components/UserPage';
 import AdminContent from './components/AdminContent';
 import PublicPage from './components/PublicPage';
+import UpdateFrameBuilder from './components/UpdateFrameBuilder';
 function App() {
   const [frameBuilder,setFrameBuilder]=useState({})
   const [kosarica, setKosarica] = useState({sadrzaj:[], user:null})
@@ -98,6 +99,7 @@ function App() {
         <Routes>
           <Route path="/admin/frameBuilders/addFrame/:id/:builderName" element={<AdminContent><AddFrame/></AdminContent>}/>
           <Route path="/admin/addBuilder" element={<AdminContent><AddFrameBuilders/></AdminContent>}/>
+          <Route path='/admin/frameBuilders/edit/:frameBuilderId' element={<AdminContent><UpdateFrameBuilder/></AdminContent>}></Route>
           <Route path="/admin/frameBuilders/:id/:name" element={<AdminContent><AdminFrameBuilder/></AdminContent>}/>
           <Route path="/admin" element={<AdminContent><AdminPage/></AdminContent>}/>
           <Route path="/register" element={<PublicPage><Registration/></PublicPage>}/>
